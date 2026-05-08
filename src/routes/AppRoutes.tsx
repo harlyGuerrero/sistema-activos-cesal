@@ -1,7 +1,9 @@
-import { Navigate, Route, Routes } from "react-router"
+import { Navigate, Route, Routes } from "react-router";
 
-import SystemLayout from "@/app/layout"
-import DashboardPage from "@/app/dashboard/page"
+import SystemLayout from "@/pages/layout";
+import DashboardPage from "@/pages/dashboard/page";
+import ActivosPage from "@/pages/activos/page";
+import CrearActivo from "@/pages/activos/CrearActivo";
 
 function PlaceholderPage({ title }: { title: string }) {
   return (
@@ -14,7 +16,7 @@ function PlaceholderPage({ title }: { title: string }) {
         Esta página será desarrollada en la siguiente etapa del sistema.
       </p>
     </section>
-  )
+  );
 }
 
 export default function AppRoutes() {
@@ -24,10 +26,10 @@ export default function AppRoutes() {
 
       <Route element={<SystemLayout />}>
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route
-          path="/activos"
-          element={<PlaceholderPage title="Gestión de Activos" />}
-        />
+
+        <Route path="/activos" element={<ActivosPage />} />
+        <Route path="/activos/editar" element={<CrearActivo />} />
+        
         <Route
           path="/movimientos"
           element={<PlaceholderPage title="Historial de Movimientos" />}
@@ -50,5 +52,5 @@ export default function AppRoutes() {
         />
       </Route>
     </Routes>
-  )
+  );
 }

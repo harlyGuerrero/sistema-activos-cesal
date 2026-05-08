@@ -6,9 +6,10 @@ import { NavPrincipal } from "@/components/nav-principal";
 import { NavOrganizacion } from "@/components/nav-organizacion";
 import { NavOperaciones } from "@/components/nav-operaciones";
 import { NavAdministracion } from "@/components/nav-administracion";
-
-
 import { NavUser } from "@/components/nav-user";
+import { NavHeader } from "@/components/nav-header";
+
+
 import {
   Sidebar,
   SidebarContent,
@@ -33,6 +34,7 @@ const data = {
     email: "a.aliaga@cesal.org",
     avatar: "/avatars/shadcn.jpg",
   },
+
   principal: [
     {
       title: "Dashboard",
@@ -81,18 +83,16 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader >
-        <div className="flex items-center gap-2">
-          
-        </div>
+      <SidebarHeader>
+        <NavHeader />
       </SidebarHeader>
-      <SidebarContent className="px-2">
-        <NavPrincipal principal={data.principal} />
+      <SidebarContent className="px-2 group-data-[collapsible=icon]:px-0">
+        <NavPrincipal principal={data.principal}/>
         <NavOrganizacion organizacion={data.organizacion} />
         <NavOperaciones operaciones={data.operaciones} />
         <NavAdministracion administracion ={data.administracion} />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="px-2 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:px-0">
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />

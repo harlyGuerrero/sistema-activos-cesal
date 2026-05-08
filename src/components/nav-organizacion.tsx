@@ -35,21 +35,33 @@ export function NavOrganizacion({
                 tooltip={item.name}
                 isActive={isActive}
                 className="
-                  relative h-12 rounded-1x1 px-5 text-[15px] font-medium
-                  text-slate-600 transition-all duration-200
-                  border-l-7 border-l-transparent
+                  relative h-12 rounded-xl border-l-[7px] border-l-transparent px-5
+                  text-[15px] font-medium text-slate-600 transition-all duration-200
 
-                  hover:bg-zinc-50 hover:text-primary
+                  hover:bg-zinc-50 hover:text-blue-600
 
+                  data-[active=true]:border-l-blue-600
                   data-[active=true]:bg-white
                   data-[active=true]:text-blue-600
-                  data-[active=true]:shadow-[0_1px_2px_rgba(0,0,0,0.05)]
                   data-[active=true]:font-semibold
-                  data-[active=true]:border-l-blue-600
+                  data-[active=true]:shadow-[0_1px_8px_rgba(0,0,0,0.08)]
 
                   [&_svg]:size-6
                   [&_svg]:shrink-0
                   data-[active=true]:[&_svg]:text-blue-600
+
+                  group-data-[collapsible=icon]:!h-10
+                  group-data-[collapsible=icon]:!w-10
+                  group-data-[collapsible=icon]:!p-0
+                  group-data-[collapsible=icon]:!border-l-[4px]
+                  group-data-[collapsible=icon]:mx-auto
+                  group-data-[collapsible=icon]:justify-center
+                  group-data-[collapsible=icon]:gap-0
+                  group-data-[collapsible=icon]:rounded-xl
+
+                  group-data-[collapsible=icon]:[&>span]:hidden
+                  group-data-[collapsible=icon]:[&_svg]:mx-auto
+                  group-data-[collapsible=icon]:[&_svg]:size-5
                 "
               >
                 <Link to={item.url}>
