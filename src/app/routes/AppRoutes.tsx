@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from "react-router";
 
-import SystemLayout from "@/pages/layout";
-import DashboardPage from "@/pages/dashboard/page";
-import ActivosPage from "@/pages/activos/page";
-import CrearActivo from "@/pages/activos/CrearActivo";
+import SystemLayout from "@/app/layouts/SystemLayout";
+import DashboardPage from "@/features/dashboard/pages/page";
+import ActivosPage from "@/features/activos/pages/page";
+import CrearActivo from "@/features/activos/pages/CrearActivo";
 
 function PlaceholderPage({ title }: { title: string }) {
   return (

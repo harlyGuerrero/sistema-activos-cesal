@@ -1,16 +1,16 @@
 import { Outlet, useLocation } from "react-router";
 import { useMemo } from "react";
 
-import { AppSidebar } from "@/components/app-sidebar";
-import { AppBreadcrumb } from "@/components/app-breadcrumb";
+import { AppSidebar } from "@/shared/components/app-sidebar";
+import { AppBreadcrumb } from "@/shared/components/app-breadcrumb";
 
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "@/shared/ui/sidebar";
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/shared/ui/separator";
 
 export default function SystemLayout() {
   const location = useLocation();

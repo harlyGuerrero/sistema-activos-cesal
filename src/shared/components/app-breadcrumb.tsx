@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import { Link } from "react-router"
 
-import type { BreadcrumbItemData } from "@/pages/layout"
+import type { BreadcrumbItemData } from "@/app/layouts/SystemLayout"
 
 import {
   Breadcrumb,
@@ -10,7 +10,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "@/shared/ui/breadcrumb"
 
 type AppBreadcrumbProps = {
   items: BreadcrumbItemData[]

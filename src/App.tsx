@@ -1,8 +1,8 @@
 import { BrowserRouter } from "react-router";
 
-import AppRoutes from "@/routes/AppRoutes";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider } from "./components/theme-provider";
+import AppRoutes from "@/app/routes/AppRoutes";
+import { TooltipProvider } from "@/shared/ui/tooltip";
+import { ThemeProvider } from "./shared/components/theme-provider";
 
 function App() {
   return (

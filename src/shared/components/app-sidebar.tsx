@@ -2,9 +2,9 @@
 
 import * as React from "react";
 
-import { NavUser } from "@/components/nav-user";
-import { NavHeader } from "@/components/nav-header";
-import { DarkModeToggle } from "@/components/dark-mode-toggle";
+import { NavUser } from "@/shared/components/nav-user";
+import { NavHeader } from "@/shared/components/nav-header";
+import { DarkModeToggle } from "@/shared/components/dark-mode-toggle";
 
 import {
   Sidebar,
@@ -12,7 +12,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar";
+} from "@/shared/ui/sidebar";
 import {
   ArrowRightLeft,
   Archive,
@@ -23,7 +23,7 @@ import {
   LucideUsers,
 } from "lucide-react";
 
-import { SidebarNavSection } from "@/components/sidebar-nav-section";
+import { SidebarNavSection } from "@/shared/components/sidebar-nav-section";
 
 // This is sample data.
 const data = {
