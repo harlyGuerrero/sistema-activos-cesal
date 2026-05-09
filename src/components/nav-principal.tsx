@@ -22,7 +22,10 @@ export function NavPrincipal({
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel className="px-7 text-zinc-400">
+      <SidebarGroupLabel className="px-7 text-xs font-semibold uppercase tracking-wide
+    text-slate-400
+    dark:text-slate-500
+    group-data-[collapsible=icon]:hidden">
         PRINCIPAL
       </SidebarGroupLabel>
 
@@ -40,32 +43,42 @@ export function NavPrincipal({
                 isActive={isActive}
                 className="
                   relative h-12 rounded-xl border-l-[7px] border-l-transparent px-5
-                  text-[15px] font-medium text-slate-600 transition-all duration-200
+  text-[15px] font-medium
+  text-slate-600 transition-all duration-200
 
-                  hover:bg-zinc-50 hover:text-blue-600
+  hover:bg-slate-100 hover:text-blue-600
 
-                  data-[active=true]:border-l-blue-600
-                  data-[active=true]:bg-white
-                  data-[active=true]:text-blue-600
-                  data-[active=true]:font-semibold
-                  data-[active=true]:shadow-[0_1px_8px_rgba(0,0,0,0.08)]
+  dark:text-slate-400
+  dark:hover:bg-slate-800
+  dark:hover:text-blue-400
 
-                  [&_svg]:size-6
-                  [&_svg]:shrink-0
-                  data-[active=true]:[&_svg]:text-blue-600
+  data-[active=true]:border-l-blue-600
+  data-[active=true]:bg-white
+  data-[active=true]:text-blue-600
+  data-[active=true]:font-semibold
+  data-[active=true]:shadow-[0_1px_8px_rgba(0,0,0,0.08)]
 
-                  group-data-[collapsible=icon]:!h-10
-                  group-data-[collapsible=icon]:!w-10
-                  group-data-[collapsible=icon]:!p-0
-                  group-data-[collapsible=icon]:!border-l-[4px]
-                  group-data-[collapsible=icon]:mx-auto
-                  group-data-[collapsible=icon]:justify-center
-                  group-data-[collapsible=icon]:gap-0
-                  group-data-[collapsible=icon]:rounded-xl
+  dark:data-[active=true]:border-l-blue-500
+  dark:data-[active=true]:bg-slate-900
+  dark:data-[active=true]:text-blue-400
+  dark:data-[active=true]:shadow-none
 
-                  group-data-[collapsible=icon]:[&>span]:hidden
-                  group-data-[collapsible=icon]:[&_svg]:mx-auto
-                  group-data-[collapsible=icon]:[&_svg]:size-5
+  [&_svg]:size-6
+  [&_svg]:shrink-0
+  [&_svg]:text-slate-500
+
+  dark:[&_svg]:text-slate-400
+
+  data-[active=true]:[&_svg]:text-blue-600
+  dark:data-[active=true]:[&_svg]:text-blue-400
+
+  group-data-[collapsible=icon]:!h-10
+  group-data-[collapsible=icon]:!w-10
+  group-data-[collapsible=icon]:!p-0
+  group-data-[collapsible=icon]:!border-l-[4px]
+  group-data-[collapsible=icon]:mx-auto
+  group-data-[collapsible=icon]:justify-center
+  group-data-[collapsible=icon]:rounded-xl
                 "
               >
                 <Link to={item.url}>

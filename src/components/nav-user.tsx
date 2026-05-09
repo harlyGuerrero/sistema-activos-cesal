@@ -18,7 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { SparklesIcon, BadgeCheckIcon, CreditCardIcon, BellIcon, LogOutIcon, EllipsisVertical } from "lucide-react"
+import { BadgeCheckIcon, BellIcon, LogOutIcon, EllipsisVertical } from "lucide-react"
 
 export function NavUser({
   user,
@@ -76,22 +76,9 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <SparklesIcon
-                />
-                Actualizar a Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
                 <BadgeCheckIcon
                 />
                 Mi Cuenta
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCardIcon
-                />
-                Facturación
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <BellIcon

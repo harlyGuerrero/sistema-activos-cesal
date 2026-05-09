@@ -2,13 +2,9 @@
 
 import * as React from "react";
 
-import { NavPrincipal } from "@/components/nav-principal";
-import { NavOrganizacion } from "@/components/nav-organizacion";
-import { NavOperaciones } from "@/components/nav-operaciones";
-import { NavAdministracion } from "@/components/nav-administracion";
 import { NavUser } from "@/components/nav-user";
 import { NavHeader } from "@/components/nav-header";
-
+import { DarkModeToggle } from "@/components/dark-mode-toggle";
 
 import {
   Sidebar,
@@ -26,6 +22,8 @@ import {
   Building2,
   LucideUsers,
 } from "lucide-react";
+
+import { SidebarNavSection } from "@/components/sidebar-nav-section";
 
 // This is sample data.
 const data = {
@@ -54,26 +52,26 @@ const data = {
   ],
   organizacion: [
     {
-      name: "Sedes",
+      title: "Sedes",
       url: "/sedes",
       icon: <Building2 />,
-    }
+    },
   ],
   operaciones: [
     {
-      name: "Reportes",
+      title: "Reportes",
       url: "/reportes",
       icon: <ChartColumnStackedIcon />,
-    }
+    },
   ],
   administracion: [
     {
-      name: "Usuarios",
+      title: "Usuarios",
       url: "/usuarios",
       icon: <LucideUsers />,
     },
     {
-      name: "Configuración",
+      title: "Configuración",
       url: "/configuracion",
       icon: <Settings />,
     },
@@ -87,12 +85,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavHeader />
       </SidebarHeader>
       <SidebarContent className="px-2 group-data-[collapsible=icon]:px-0">
-        <NavPrincipal principal={data.principal}/>
-        <NavOrganizacion organizacion={data.organizacion} />
-        <NavOperaciones operaciones={data.operaciones} />
-        <NavAdministracion administracion ={data.administracion} />
+        <SidebarNavSection label="Principal" items={data.principal} />
+        <SidebarNavSection label="Organización" items={data.organizacion} />
+        <SidebarNavSection label="Operaciones" items={data.operaciones} />
+        <SidebarNavSection label="Administración" items={data.administracion} />
       </SidebarContent>
-      <SidebarFooter className="px-2 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:px-0">
+      <SidebarFooter
+        className="gap-3 px-3 pb-4
+    group-data-[collapsible=icon]:items-center
+    group-data-[collapsible=icon]:px-0"
+      >
+        <DarkModeToggle />
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />
