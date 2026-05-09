@@ -7,7 +7,7 @@ export default function ActivosPage (){
 
     <div>
       <h1>Este será el contenido de Activos</h1>
-      <Link to={"editar"}>
+      <Link to={"crear"}>
         <Button variant={"outline"}>Crear Activo</Button>
       </Link>
     </div>

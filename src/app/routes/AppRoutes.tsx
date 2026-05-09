@@ -4,6 +4,7 @@ import SystemLayout from "@/app/layouts/SystemLayout";
 import DashboardPage from "@/features/dashboard/pages/page";
 import ActivosPage from "@/features/activos/pages/page";
 import CrearActivo from "@/features/activos/pages/CrearActivo";
+import LoginPage from "@/features/login/page";
 
 function PlaceholderPage({ title }: { title: string }) {
   return (
@@ -22,13 +23,15 @@ function PlaceholderPage({ title }: { title: string }) {
 export default function AppRoutes() {
   return (
     <Routes>
+
+      <Route path="/login" element={<LoginPage/>}/>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
       <Route element={<SystemLayout />}>
         <Route path="/dashboard" element={<DashboardPage />} />
 
         <Route path="/activos" element={<ActivosPage />} />
-        <Route path="/activos/editar" element={<CrearActivo />} />
+        <Route path="/activos/crear" element={<CrearActivo />} />
         
         <Route
           path="/movimientos"
