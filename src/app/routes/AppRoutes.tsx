@@ -4,7 +4,9 @@ import SystemLayout from "@/app/layouts/SystemLayout";
 import DashboardPage from "@/features/dashboard/pages/page";
 import ActivosPage from "@/features/activos/pages/page";
 import CrearActivo from "@/features/activos/pages/CrearActivo";
-import LoginPage from "@/features/login/page";
+import LoginPage from "@/features/login/pages/LoginPage";
+import CambiarContrasenia from "@/features/login/pages/CambiarContrasenia";
+import ContraseniaActualizada from "@/features/login/pages/ContraseniaActualizada";
 
 function PlaceholderPage({ title }: { title: string }) {
   return (
@@ -23,16 +25,19 @@ function PlaceholderPage({ title }: { title: string }) {
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Rutas públicas / acceso */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/cambiar-contrasenia" element={<CambiarContrasenia />} />
+      <Route path="/contrasenia-actualizada" element={<ContraseniaActualizada />} />
 
-      <Route path="/login" element={<LoginPage/>}/>
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
+      {/* Rutas privadas del sistema */}
       <Route element={<SystemLayout />}>
         <Route path="/dashboard" element={<DashboardPage />} />
-
         <Route path="/activos" element={<ActivosPage />} />
+
         <Route path="/activos/crear" element={<CrearActivo />} />
-        
+
         <Route
           path="/movimientos"
           element={<PlaceholderPage title="Historial de Movimientos" />}
