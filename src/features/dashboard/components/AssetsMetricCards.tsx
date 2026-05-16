@@ -73,19 +73,19 @@ const cardVariants: Record<
 > = {
   blue: {
     border: "border-l-[#006BA6]",
-    iconBox: "bg-blue-100 text-[#006BA6]",
+    iconBox: "bg-blue-100 text-[#006BA6] dark:bg-blue-950",
   },
   green: {
     border: "border-l-emerald-500",
-    iconBox: "bg-emerald-100 text-emerald-600",
+    iconBox: "bg-emerald-100 text-emerald-600 dark:bg-emerald-950",
   },
   blueLight: {
     border: "border-l-blue-500",
-    iconBox: "bg-blue-100 text-blue-500",
+    iconBox: "bg-blue-100 text-blue-500 dark:bg-blue-950",
   },
   orange: {
     border: "border-l-orange-400",
-    iconBox: "bg-orange-100 text-orange-500",
+    iconBox: "bg-orange-100 text-orange-500 dark:bg-orange-950",
   },
 };
 
@@ -95,7 +95,7 @@ const descriptionVariants: Record<DescriptionVariant, string> = {
   warning: "text-orange-500",
 };
 
-export function DashboardMetricCards() {
+export function AssetsMetricCards() {
   return (
     <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
       {dashboardMetrics.map((metric) => {
@@ -108,7 +108,7 @@ export function DashboardMetricCards() {
             className={cn(
               "overflow-hidden ring-0 rounded-2xl border-0 border-l-4 bg-white shadow-sm",
               "transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md",
-              "dark:bg-slate-900",
+              "dark:bg-slate-950",
               variant.border,
             )}
           >
@@ -119,7 +119,7 @@ export function DashboardMetricCards() {
                     {metric.title}
                   </p>
                   <div className="flex items-center">
-                    <h3 className="text-[30px] font-semibold leading-none tracking-[-0.02em] text-slate-950 dark:text-slate-50">
+                    <h3 className="text-[30px] font-semibold leading-none tracking-[-0.02em] text-slate-950 dark:text-slate-400">
                       {metric.value.toLocaleString("en-US")}
                     </h3>
                   </div>

@@ -57,13 +57,13 @@ const chartConfig = {
 
 const ACTIVE_INDEX = 2
 
-export function AssetDistributionChart() {
+export function AssetsBarChart() {
   const [date, setDate] = React.useState<Date>()
 
   return (
-    <Card className="rounded-3xl border-0 ring-0 shadow-sm">
+    <Card className="rounded-3xl border-0 ring-0 shadow-sm dark:bg-slate-950">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-[20px] font-semibold text-slate-800">
+        <CardTitle className="text-[20px] font-semibold text-slate-800 dark:text-slate-400">
           Distribución de activos por sede
         </CardTitle>
 
@@ -71,7 +71,7 @@ export function AssetDistributionChart() {
           <PopoverTrigger asChild>
             <Button
               variant="outline"
-              className="rounded-xl border-slate-200"
+              className="rounded-xl border-slate-200 dark:border-slate-400 dark:text-slate-400"
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
 

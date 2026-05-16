@@ -71,7 +71,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function AssetStatusChart() {
+export function AssetsStatusChart() {
   const id = "asset-status-chart"
 
   const [activeStatus, setActiveStatus] = React.useState("disponible")
@@ -102,20 +102,20 @@ export function AssetStatusChart() {
   )
 
   return (
-    <Card className="h-full rounded-3xl ring-0 border-0">
+    <Card className="h-full rounded-3xl ring-0 border-0 dark:bg-slate-950">
       <ChartStyle id={id} config={chartConfig} />
 
       {/* HEADER */}
       <CardHeader className="flex flex-row items-center justify-between pb-4">
         <div className="space-y-1">
-          <CardTitle className="text-[20px] font-semibold text-slate-800">
+          <CardTitle className="text-[20px] font-semibold text-slate-800 dark:text-slate-400">
             Activos por Estado
           </CardTitle>
         </div>
 
         <Select value={activeStatus} onValueChange={setActiveStatus}>
-          <SelectTrigger className="h-10 w-[160px] rounded-xl border-slate-200">
-            <SelectValue />
+          <SelectTrigger className="h-10 w-[160px] rounded-xl border-slate-200 dark:text-slate-400 dark:border-slate-400">
+            <SelectValue className="dark:text-slate-400"/>
           </SelectTrigger>
 
           <SelectContent>
@@ -163,7 +163,7 @@ export function AssetStatusChart() {
                       <tspan
                         x={viewBox.cx}
                         y={viewBox.cy - 2}
-                        className="fill-slate-900 text-3xl font-bold"
+                        className="fill-slate-900 text-3xl font-bold dark:fill-slate-400"
                       >
                         {assetData[activeIndex].total.toLocaleString()}
                       </tspan>
@@ -205,7 +205,7 @@ export function AssetStatusChart() {
                     }}
                   />
 
-                  <span className="text-slate-600">
+                  <span className="font-medium text-slate-600 dark:text-slate-700">
                     {
                       chartConfig[
                         item.status as keyof typeof chartConfig
@@ -214,7 +214,7 @@ export function AssetStatusChart() {
                   </span>
                 </div>
 
-                <span className="font-semibold text-slate-800">
+                <span className="font-semibold text-slate-800 dark:text-slate-400">
                   {item.total.toLocaleString()} · {percentage}%
                 </span>
               </div>
