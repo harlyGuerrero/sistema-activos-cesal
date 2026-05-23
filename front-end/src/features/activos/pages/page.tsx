@@ -1,4 +1,4 @@
-import { AssetsTable } from "@/features/dashboard/components/AssetsTable";
+import { AssetsTable } from "@/features/activos/components/assets-table";
 import { Button } from "@/shared/ui/button";
 import { Link } from "react-router";
 

@@ -112,7 +112,7 @@ export function AssetsMetricCards() {
               variant.border,
             )}
           >
-            <CardContent className="grid h-[118px] grid-rows-[auto_1fr_auto] px-6 py-5">
+            <CardContent className="grid h-29.5 grid-rows-[auto_1fr_auto] px-6 py-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-slate-500 dark:text-slate-400">

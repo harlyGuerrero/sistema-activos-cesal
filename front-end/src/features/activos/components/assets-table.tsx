@@ -5,20 +5,11 @@ import {
   Eye,
   Pencil,
   Trash2,
-  Laptop,
-  Printer,
-  Armchair,
-  Car,
-  Monitor,
   ChevronLeft,
   ChevronRight,
-  CheckCircle2,
-  Circle,
-  AlertTriangle,
-  XCircle,
 } from "lucide-react";
 
-import { Card, CardContent } from "@/shared/ui/card";
+import { Card, CardContent, CardTitle } from "@/shared/ui/card";
 import { Input } from "@/shared/ui/input";
 import {
   Select,
@@ -28,112 +19,14 @@ import {
   SelectValue,
 } from "@/shared/ui/select";
 
-type Asset = {
-  codigo: string;
-  factura: string;
-  proveedor: string;
-  nombre: string;
-  categoria: string;
-  sede: string;
-  codigoProyecto: string;
-  estado: "Disponible" | "Asignado" | "Mantenimiento" | "Baja";
-  icon: React.ElementType;
-};
+import { assets } from "../data/assets.mock";
 
-const assets: Asset[] = [
-  {
-    codigo: "ACT-2023-001",
-    proveedor: "S2011523267",
-    factura: "F001-0005620",
-    nombre: 'MacBook Pro M2 14"',
-    categoria: "Tecnología",
-    sede: "Lima - Oficina 302",
-    codigoProyecto: "PRY-EDU-001",
-    estado: "Disponible",
-    icon: Laptop,
-  },
-  {
-    codigo: "ACT-2023-045",
-    proveedor: "50653",
-    factura: "F001-0008620",
-    nombre: "Escritorio Ergonómico",
-    categoria: "Mobiliario",
-    sede: "Cusco - Regional",
-    codigoProyecto: "PRY-GOP-004",
-    estado: "Asignado",
-    icon: Armchair,
-  },
-  {
-    codigo: "ACT-2022-112",
-    proveedor: "968947",
-    factura: "F001-0009920",
-    nombre: "Toyota Hilux 2022",
-    categoria: "Vehículos",
-    sede: "Arequipa - Campo",
-    codigoProyecto: "PRY-SAL-002",
-    estado: "Mantenimiento",
-    icon: Car,
-  },
-  {
-    codigo: "ACT-2020-089",
-    proveedor: "50651",
-    factura: "F001-0006920",
-    nombre: "Impresora Industrial",
-    categoria: "Tecnología",
-    sede: "Almacén Central",
-    codigoProyecto: "PRY-ADM-010",
-    estado: "Baja",
-    icon: Printer,
-  },
-  {
-    codigo: "ACT-2024-021",
-    proveedor: "50698",
-    factura: "F001-0009620",
-    nombre: "Monitor Dell 27”",
-    categoria: "Tecnología",
-    sede: "Lima - Oficina 101",
-    codigoProyecto: "PRY-EDU-003",
-    estado: "Disponible",
-    icon: Monitor,
-  },
-  {
-    codigo: "ACT-2024-056",
-    proveedor: "50690",
-    factura: "F001-0008920",
-    nombre: "Silla Ejecutiva",
-    categoria: "Mobiliario",
-    sede: "Huancayo - Operaciones",
-    codigoProyecto: "PRY-OPE-005",
-    estado: "Asignado",
-    icon: Armchair,
-  },
-  {
-    codigo: "ACT-2023-090",
-    proveedor: "50660",
-    factura: "F001-0003620",
-    nombre: "Laptop Lenovo ThinkPad",
-    categoria: "Tecnología",
-    sede: "Apurímac - Regional",
-    codigoProyecto: "PRY-TIC-008",
-    estado: "Disponible",
-    icon: Laptop,
-  },
-];
+import {
+  badgeStyles,
+  statusIcons,
+} from "../constants/asset-status";
 
-const badgeStyles: Record<Asset["estado"], string> = {
-  Disponible: "bg-green-100 text-green-700 dark:bg-green-950",
-  Asignado: "bg-blue-100 text-blue-700 dark:bg-blue-950",
-  Mantenimiento: "bg-yellow-100 text-yellow-700 dark:bg-yellow-950",
-  Baja: "bg-red-100 text-red-700 dark:bg-red-950",
-};
-const statusIcons: Record<Asset["estado"], React.ReactNode> = {
-  Disponible: (
-    <CheckCircle2 className="h-3 w-3 text-green-500 fill-green-500" />
-  ),
-  Asignado: <Circle className="h-3 w-3 fill-blue-500 text-blue-500" />,
-  Mantenimiento: <AlertTriangle className="h-3 w-3 text-amber-500" />,
-  Baja: <XCircle className="h-3 w-3 text-red-500" />,
-};
+
 export function AssetsTable() {
   const [search, setSearch] = useState("");
   const [categoria, setCategoria] = useState("Todas");
@@ -165,6 +58,9 @@ export function AssetsTable() {
   return (
     <Card className="rounded-3xl border-none shadow-sm ring-0 dark:bg-slate-950">
       <CardContent className="p-4 md:p-6">
+        <CardTitle className="text-[20px] font-semibold text-slate-800 dark:text-slate-400 pb-5">
+          Activos Recientes
+        </CardTitle>
         {/* FILTROS */}
         <div className="mb-6 rounded-2xl bg-slate-50 p-4 md:p-6 dark:bg-slate-900">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
@@ -177,7 +73,6 @@ export function AssetsTable() {
                 placeholder="ID, Serie..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                
               />
             </div>
 
@@ -187,7 +82,10 @@ export function AssetsTable() {
                 Categoría
               </label>
               <Select value={categoria} onValueChange={setCategoria}>
-                <SelectTrigger size={"sm"} className="w-full dark:text-slate-400">
+                <SelectTrigger
+                  size={"sm"}
+                  className="w-full dark:text-slate-400"
+                >
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="dark:text-slate-400">
@@ -205,7 +103,10 @@ export function AssetsTable() {
                 Estado
               </label>
               <Select value={estado} onValueChange={setEstado}>
-                <SelectTrigger size={"sm"} className="w-full dark:text-slate-400">
+                <SelectTrigger
+                  size={"sm"}
+                  className="w-full dark:text-slate-400"
+                >
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="dark:text-slate-400">
@@ -224,7 +125,10 @@ export function AssetsTable() {
                 Sede
               </label>
               <Select value={sede} onValueChange={setSede}>
-                <SelectTrigger size={"sm"} className="w-full dark:text-slate-400">
+                <SelectTrigger
+                  size={"sm"}
+                  className="w-full dark:text-slate-400"
+                >
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="dark:text-slate-400">
@@ -288,7 +192,9 @@ export function AssetsTable() {
 
                     <td className="dark:text-slate-400">{asset.categoria}</td>
                     <td className="dark:text-slate-400">{asset.sede}</td>
-                    <td className="dark:text-slate-400">{asset.codigoProyecto}</td>
+                    <td className="dark:text-slate-400">
+                      {asset.codigoProyecto}
+                    </td>
 
                     <td>
                       <div
@@ -326,7 +232,9 @@ export function AssetsTable() {
                       <Icon className="h-5 w-5 text-blue-600" />
                     </div>
                     <div>
-                      <p className="font-medium dark:text-slate-400">{asset.nombre}</p>
+                      <p className="font-medium dark:text-slate-400">
+                        {asset.nombre}
+                      </p>
                       <p className="text-xs text-slate-500">{asset.codigo}</p>
                     </div>
                   </div>

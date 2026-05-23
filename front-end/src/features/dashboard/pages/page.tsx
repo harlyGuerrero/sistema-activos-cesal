@@ -1,7 +1,7 @@
 import { AssetsMetricCards } from "@/features/dashboard/components/AssetsMetricCards";
 import { AssetsBarChart } from "../components/AssetsBarChart";
 import { AssetsStatusChart } from "../components/AssetsStatusChart";
-import { AssetsTable } from "../components/AssetsTable";
+import { AssetsTable } from "../../activos/components/assets-table";
 
 export default function DashboardPage() {
   return (
