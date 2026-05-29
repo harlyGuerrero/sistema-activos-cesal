@@ -23,7 +23,7 @@ async function verificarCredenciales(correo, password) {
 
 
     const token = jwt.sign(
-        { id: usuario.usuario_id, rol: usuario.rol_nombre },
+        { id: usuario.id, rol: usuario.nombreRol },
         process.env.JWT_SECRET,
         { expiresIn: '8h' }
     );
@@ -33,10 +33,10 @@ async function verificarCredenciales(correo, password) {
         message: '¡Bienvenido!',
         token,
         user: {
-            id: usuario.usuario_id,
-            nombre: usuario.nombre_usuario,
-            apellido: usuario.apellido_usuario,
-            rol: usuario.rol_nombre
+            id: usuario.id,
+            nombre: usuario.nombreUsuario,
+            apellido: usuario.apellido,
+            rol: usuario.nombreRol
         }
     };
 }
