@@ -3,7 +3,7 @@ const swaggerUi = require('swagger-ui-express');
 const path = require('path'); // 1. Importamos 'path'
 
 const options = {
-    definition: {
+     definition: {
         openapi: '3.0.0',
         info: {
             title: 'API de Control de Activos Fijos',
@@ -16,8 +16,18 @@ const options = {
                 description: 'Servidor de Desarrollo Local',
             },
         ],
+
+       components: {
+    securitySchemes: {
+        bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT'
+        }
+    }
+}
     },
-    // 2. Corregimos usando path.join para asegurar que encuentre la carpeta routes
+
     apis: [path.join(__dirname, '../routes/*.js')],
 };
 

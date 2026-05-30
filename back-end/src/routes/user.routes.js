@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 const userController = require('../controllers/user.controller');
+const { verificarToken } = require('../middlewares/auth.middleware');
 
 /**
  * @swagger
  * /api/users:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Listar usuarios
  *     description: Obtiene la lista de usuarios registrados.
  *     tags:
@@ -14,6 +17,8 @@ const userController = require('../controllers/user.controller');
  *     responses:
  *       200:
  *         description: Lista de usuarios obtenida correctamente.
+ *       401:
+ *         description: Token inválido o no enviado.
  *       500:
  *         description: Error interno del servidor.
  *
@@ -69,8 +74,6 @@ const userController = require('../controllers/user.controller');
  *         description: Usuario encontrado.
  *       404:
  *         description: Usuario no encontrado.
- *       500:
- *         description: Error interno del servidor.
  *
  *   put:
  *     summary: Actualizar usuario
@@ -103,8 +106,6 @@ const userController = require('../controllers/user.controller');
  *     responses:
  *       200:
  *         description: Usuario actualizado correctamente.
- *       500:
- *         description: Error interno del servidor.
  *
  *   delete:
  *     summary: Eliminar usuario
@@ -123,11 +124,9 @@ const userController = require('../controllers/user.controller');
  *         description: Usuario eliminado correctamente.
  *       404:
  *         description: Usuario no encontrado.
- *       500:
- *         description: Error interno del servidor.
  */
 
-router.get('/', userController.listarUsuarios);
+router.get('/', verificarToken, userController.listarUsuarios);
 router.post('/', userController.crearUsuario);
 router.get('/:id', userController.obtenerUsuarioPorId);
 router.put('/:id', userController.actualizarUsuario);
