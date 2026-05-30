@@ -71,7 +71,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function AssetsStatusChart() {
+export function GraficoActivosPorEstado() {
   const id = "asset-status-chart"
 
   const [activeStatus, setActiveStatus] = React.useState("disponible")

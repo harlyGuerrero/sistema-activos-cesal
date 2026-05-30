@@ -84,8 +84,8 @@ export function SidebarNavSection({
 
                   group-data-[collapsible=icon]:!h-10
                   group-data-[collapsible=icon]:!w-10
-                  group-data-[collapsible=icon]:!p-0
-                  group-data-[collapsible=icon]:!border-l-[4px]
+                  group-data-[collapsible=icon]:p-0!
+                  group-data-[collapsible=icon]:!border-l-4!
                   group-data-[collapsible=icon]:mx-auto
                   group-data-[collapsible=icon]:justify-center
                   group-data-[collapsible=icon]:rounded-xl

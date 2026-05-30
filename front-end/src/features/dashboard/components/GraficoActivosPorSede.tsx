@@ -48,7 +48,7 @@ const chartConfig = {
 
 const ACTIVE_INDEX = 2;
 
-export function AssetsBarChart() {
+export function GraficoActivosPorSede() {
   const [date, setDate] = React.useState<Date>();
 
   return (

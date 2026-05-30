@@ -1,5 +1,5 @@
 import { AppProviders } from "@/app/providers/AppProviders"
-import AppRouter from "@/app/routes/AppRotes-v1"
+import AppRouter from "@/app/routes/AppRoutes"
 
 function App() {
   return (

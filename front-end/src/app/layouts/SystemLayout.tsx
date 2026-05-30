@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from "react-router";
 import { useMemo } from "react";
 
-import { AppSidebar } from "@/shared/components/app-sidebar";
-import { AppBreadcrumb } from "@/shared/components/app-breadcrumb";
+import { AppSidebar } from "@/shared/components/navigation/app-sidebar";
+import { AppBreadcrumb } from "@/shared/components/navigation/app-breadcrumb";
 
 import {
   SidebarInset,

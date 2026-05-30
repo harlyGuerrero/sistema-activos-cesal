@@ -95,7 +95,7 @@ const descriptionVariants: Record<DescriptionVariant, string> = {
   warning: "text-orange-500",
 };
 
-export function AssetsMetricCards() {
+export function TarjetasMetricasActivos() {
   return (
     <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
       {dashboardMetrics.map((metric) => {

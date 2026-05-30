@@ -1,12 +1,12 @@
-import { Navigate, Route, Routes } from "react-router";
-
-import SystemLayout from "@/app/layouts/SystemLayout";
-import DashboardPage from "@/features/dashboard/pages/page";
-import ActivosPage from "@/features/activos/pages/page";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
+import SystemLayout from "../layouts/SystemLayout";
+import DashboardPage from "@/features/dashboard/pages/DashboardPage";
+import ActivosPage from "@/features/activos/pages/ActivosPage";
 import CrearActivo from "@/features/activos/pages/CrearActivo";
 import LoginPage from "@/features/login/pages/LoginPage";
 import CambiarContrasenia from "@/features/login/pages/CambiarContrasenia";
 import ContraseniaActualizada from "@/features/login/pages/ContraseniaActualizada";
+import ErrorPage from "../layouts/ErrorPage";
 
 function PlaceholderPage({ title }: { title: string }) {
   return (
@@ -22,43 +22,70 @@ function PlaceholderPage({ title }: { title: string }) {
   );
 }
 
-export default function AppRoutes() {
-  return (
-    <Routes>
-      {/* Rutas públicas / acceso */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/cambiar-contrasenia" element={<CambiarContrasenia />} />
-      <Route path="/contrasenia-actualizada" element={<ContraseniaActualizada />} />
+const Router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to="/login" replace />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage/>
+  },
+  {
+    path: "*",
+    element: <ErrorPage/>
+  },
+  {
+    path: "/cambiar-contrasenia",
+    element: <CambiarContrasenia/>
+  },
+  {
+path: "/contrasenia-actualizada",
+element: <ContraseniaActualizada/>
+  },
 
-      {/* Rutas privadas del sistema */}
-      <Route element={<SystemLayout />}>
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/activos" element={<ActivosPage />} />
+  {
+    path: "/",
+    element: <SystemLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <DashboardPage />,
+      },
+      {
+        path: "/activos",
+        element: <ActivosPage />,
+      },
+      {
+            path: "/activos/crear",
+            element: <CrearActivo />,
+      },
+      {
+        path: "/movimientos",
+        element: <PlaceholderPage title="Historial de Movimientos" />,
+      },
+      {
+        path: "/reportes",
+        element: <PlaceholderPage title="Reportes" />,
+      },
+      {
+        path: "/sedes",
+        element: <PlaceholderPage title="Gestión de Sedes" />,
+      },
+      {
+        path: "/usuarios",
+        element: <PlaceholderPage title="Gestión de Usuarios" />,
+      },
+      {
+        path: "/configuracion",
+        element: <PlaceholderPage title="Configuración" />,
+      },
+    ],
+  },
+]);
 
-        <Route path="/activos/crear" element={<CrearActivo />} />
-
-        <Route
-          path="/movimientos"
-          element={<PlaceholderPage title="Historial de Movimientos" />}
-        />
-        <Route
-          path="/reportes"
-          element={<PlaceholderPage title="Reportes" />}
-        />
-        <Route
-          path="/sedes"
-          element={<PlaceholderPage title="Gestión de Sedes" />}
-        />
-        <Route
-          path="/usuarios"
-          element={<PlaceholderPage title="Gestión de Usuarios" />}
-        />
-        <Route
-          path="/configuracion"
-          element={<PlaceholderPage title="Configuración" />}
-        />
-      </Route>
-    </Routes>
-  );
+function AppRouter() {
+  return <RouterProvider router={Router} />;
 }
+
+export default AppRouter;

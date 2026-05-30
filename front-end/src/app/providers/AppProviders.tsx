@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 
 import { TooltipProvider } from "@/shared/ui/tooltip"
-import { ThemeProvider } from "@/shared/components/theme-provider"
+import { ThemeProvider } from "@/app/providers/ThemeProvider"
 
 type AppProvidersProps = {
   children: ReactNode
