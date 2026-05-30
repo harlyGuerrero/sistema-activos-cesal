@@ -20,22 +20,46 @@ import { Checkbox } from "@/shared/ui/checkbox";
 
 import LoginBg from "@/assets/cesal-login-bg.png";
 import LogoCollapsed from "@/assets/logo-collapsed.png";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginSchema, type LoginFormData } from "../schemas/LoginSchema";
+
+import { login } from "../api/auth.service";
+import { useAuthStore } from "../store/authStore";
 
 export function LoginForm({ ...props }: React.ComponentProps<"div">) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const setSession = useAuthStore((state) => state.setSession);
 
-function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-  event.preventDefault()
+  const form = useForm<LoginFormData>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
+  });
 
-  const userMustChangePassword = true
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const response = await login(data.email, data.password);
 
-  if (userMustChangePassword) {
-    navigate("/cambiar-contrasenia")
-    return
-  }
+      console.log(response);
 
-  navigate("/dashboard")
-}
+      setSession(response.token, response.user);
+
+      if (response.user.auth === 1) {
+        navigate("/cambiar-contrasenia");
+        return;
+      }
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+
+      alert("Correo o contraseña incorrectos");
+    }
+  };
 
   return (
     <div className="w-full max-w-[900px]" {...props}>
@@ -95,7 +119,7 @@ function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
           {/* Panel derecho */}
           <section className="flex h-full flex-col justify-center bg-white px-10 py-8">
             <div className="mx-auto w-full max-w-[340px]">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
                 <FieldGroup className="gap-4">
                   <div>
                     <img
@@ -122,19 +146,27 @@ function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
                     </FieldLabel>
 
                     <div className="relative">
-                      <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                      <Mail className="absolute left-3.5 top-3.5 h-4 w-4  text-slate-400" />
 
                       <Input
                         id="email"
                         type="email"
                         placeholder="test.admin001@cesal.org"
-                        required
+                        {...form.register("email")}
                         className="
-                          h-11 rounded-xl border-0 bg-slate-100 pl-10
-                          text-sm text-slate-700 placeholder:text-slate-400
-                          focus-visible:ring-2 focus-visible:ring-[#145EA8]
-                        "
+    h-11 rounded-xl border-0 bg-slate-100 pl-10
+    text-sm text-slate-700
+    placeholder:text-slate-400
+    focus-visible:ring-2
+    focus-visible:ring-[#145EA8]
+  "
                       />
+
+                      {form.formState.errors.email && (
+                        <p className="mt-1 text-xs text-red-500">
+                          {form.formState.errors.email.message}
+                        </p>
+                      )}
                     </div>
                   </Field>
 
@@ -147,25 +179,39 @@ function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
                     </FieldLabel>
 
                     <div className="relative">
-                      <LockKeyhole className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                      <LockKeyhole className="absolute left-3.5 top-3.5 h-4 w-4  text-slate-400" />
 
                       <Input
                         id="password"
                         type="password"
                         placeholder="••••••••••"
-                        required
+                        {...form.register("password")}
                         className="
-                          h-11 rounded-xl border-0 bg-slate-100 pl-10
-                          text-sm text-slate-700 placeholder:text-slate-400
-                          focus-visible:ring-2 focus-visible:ring-[#145EA8]
-                        "
+    h-11 rounded-xl border-0 bg-slate-100 pl-10
+    text-sm text-slate-700
+    placeholder:text-slate-400
+    focus-visible:ring-2
+    focus-visible:ring-[#145EA8]
+  "
                       />
+
+                      {form.formState.errors.password && (
+                        <p className="mt-1 text-xs text-red-500">
+                          {form.formState.errors.password.message}
+                        </p>
+                      )}
                     </div>
                   </Field>
 
                   <div className="flex items-center justify-between text-xs">
                     <label className="flex items-center gap-2 text-slate-600">
-                      <Checkbox className="h-3.5 w-3.5" />
+                      <Checkbox
+                        checked={form.watch("rememberMe")}
+                        onCheckedChange={(checked) =>
+                          form.setValue("rememberMe", !!checked)
+                        }
+                        className="h-3.5 w-3.5"
+                      />
                       <span>Recordar sesión</span>
                     </label>
 

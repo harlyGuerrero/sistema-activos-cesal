@@ -73,7 +73,7 @@ export function NavUser({
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-slate-300" />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheckIcon
@@ -86,7 +86,7 @@ export function NavUser({
                 Notificaciones
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-slate-300"/>
             <DropdownMenuItem>
               <LogOutIcon
               />

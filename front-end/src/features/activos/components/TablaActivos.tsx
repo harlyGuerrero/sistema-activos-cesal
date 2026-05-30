@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import {
   Eye,
   Pencil,
-  Trash2,
   ChevronLeft,
   ChevronRight,
   ArchiveX,
@@ -383,8 +382,21 @@ export function TablaActivos() {
                 </div>
 
                 <div className="mt-4 flex gap-4">
-                  <Eye className="h-4 w-4 text-blue-600" />
-                  <Pencil className="h-4 w-4 text-blue-600" />
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="h-8 w-8 rounded-lg"
+                  >
+                    <Eye className="h-4 w-4 text-blue-600 dark:text-slate-300" />
+                  </Button>
+
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="h-8 w-8 rounded-lg"
+                  >
+                    <Pencil className="h-4 w-4 text-blue-600" />
+                  </Button>
                   {asset.estado !== "Baja" ? (
                     <Button
                       size="icon"

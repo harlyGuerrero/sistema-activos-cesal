@@ -1,20 +1,37 @@
-import { useNavigate } from "react-router"
-import { LockKeyhole, RotateCcwKey, ShieldCheck, Info } from "lucide-react"
+import { useNavigate } from "react-router";
+import { LockKeyhole, RotateCcwKey, ShieldCheck, Info } from "lucide-react";
 
-import { Button } from "@/shared/ui/button"
-import { Card, CardContent } from "@/shared/ui/card"
-import { Input } from "@/shared/ui/input"
-import { Label } from "@/shared/ui/label"
+import { Button } from "@/shared/ui/button";
+import { Card, CardContent } from "@/shared/ui/card";
+import { Input } from "@/shared/ui/input";
+import { Label } from "@/shared/ui/label";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import {
+  CambiarContraseniaSchema,
+  type CambiarContraseniaFormData,
+} from "../schemas/CambiarContraseniaSchema";
 
 export default function CambiarContrasenia() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+  const form = useForm<CambiarContraseniaFormData>({
+    resolver: zodResolver(CambiarContraseniaSchema),
 
-    // Aquí luego validarás y enviarás al backend.
-    navigate("/contrasenia-actualizada")
-  }
+    defaultValues: {
+      contraseniaActual: "",
+      nuevaContrasenia: "",
+      confirmarContrasenia: "",
+    },
+  });
+
+  const onSubmit = (data: CambiarContraseniaFormData) => {
+    console.log(data);
+
+    navigate("/contrasenia-actualizada");
+  };
 
   return (
     <main
@@ -35,23 +52,31 @@ export default function CambiarContrasenia() {
             </h1>
 
             <p className="mt-2 text-sm leading-6 text-slate-500">
-              Actualiza tus credenciales para mantener la seguridad de la cuenta institucional.
+              Actualiza tus credenciales para mantener la seguridad de la cuenta
+              institucional.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             <div className="space-y-2">
               <Label className="text-xs font-bold uppercase tracking-wide text-slate-600">
                 Contraseña actual
               </Label>
 
               <div className="relative">
-                <LockKeyhole className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                <LockKeyhole className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-500" />
                 <Input
                   type="password"
                   placeholder="••••••••"
+                  {...form.register("contraseniaActual")}
                   className="h-11 border-0 bg-slate-100 pl-10"
                 />
+
+                {form.formState.errors.contraseniaActual && (
+                  <p className="text-xs text-red-500">
+                    {form.formState.errors.contraseniaActual.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -61,12 +86,19 @@ export default function CambiarContrasenia() {
               </Label>
 
               <div className="relative">
-                <RotateCcwKey className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                <RotateCcwKey className="absolute left-3.5 top-3.5 h-4 w-4  text-slate-500" />
                 <Input
                   type="password"
                   placeholder="••••••••"
+                  {...form.register("nuevaContrasenia")}
                   className="h-11 border-0 bg-slate-100 pl-10"
                 />
+
+                {form.formState.errors.nuevaContrasenia && (
+                  <p className="text-xs text-red-500">
+                    {form.formState.errors.nuevaContrasenia.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -76,25 +108,43 @@ export default function CambiarContrasenia() {
               </Label>
 
               <div className="relative">
-                <ShieldCheck className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                <ShieldCheck className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-500" />
                 <Input
                   type="password"
                   placeholder="••••••••"
+                  {...form.register("confirmarContrasenia")}
                   className="h-11 border-0 bg-slate-100 pl-10"
                 />
+
+                {form.formState.errors.confirmarContrasenia && (
+                  <p className="text-xs text-red-500">
+                    {form.formState.errors.confirmarContrasenia.message}
+                  </p>
+                )}
               </div>
             </div>
 
             <div className="flex gap-3 rounded-lg bg-orange-50 px-3 py-3 text-xs text-orange-700">
               <Info className="mt-0.5 h-4 w-4 shrink-0" />
               <p>
-                La contraseña debe contener al menos 8 caracteres, una mayúscula y un número.
+                La contraseña debe contener al menos 8 caracteres, una mayúscula
+                y un número.
               </p>
             </div>
 
             <Button
               type="submit"
-              className="h-12 w-full rounded-xl bg-[#0079B8] text-sm font-semibold shadow-[0_10px_22px_rgba(0,121,184,0.22)] hover:bg-[#006BA6]"
+              disabled={form.formState.isSubmitting}
+              className="
+    h-12
+    w-full
+    rounded-xl
+    bg-[#0079B8]
+    text-sm
+    font-semibold
+    shadow-[0_10px_22px_rgba(0,121,184,0.22)]
+    hover:bg-[#006BA6]
+  "
             >
               Cambiar Contraseña
             </Button>
@@ -111,5 +161,5 @@ export default function CambiarContrasenia() {
         </CardContent>
       </Card>
     </main>
-  )
+  );
 }

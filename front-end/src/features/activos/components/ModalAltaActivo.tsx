@@ -12,6 +12,8 @@ import {
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogTitle,
 } from "@/shared/ui/dialog";
 
 import { Button } from "@/shared/ui/button";
@@ -55,13 +57,13 @@ export function ModalAltaActivo({
               </div>
 
               <div>
-                <h2 className="text-[20px] font-bold text-slate-900">
+                <DialogTitle className="text-[20px] font-bold text-slate-900">
                   Confirmar Alta de Activo
-                </h2>
+                </DialogTitle>
 
-                <p className="text-base text-slate-500">
+                <DialogDescription className="text-base text-slate-500">
                   Gestión Institucional de Inventarios
-                </p>
+                </DialogDescription>
               </div>
             </div>
           </div>
@@ -73,8 +75,8 @@ export function ModalAltaActivo({
 
           {/* MENSAJE */}
 
-          <div className="rounded-3xl bg-slate-100 p-6">
-            <p className="text-[15px] leading-6 text-slate-700">
+          <div className="rounded-3xl bg-slate-100 p-6 dark:bg-slate-950 ">
+            <p className="text-[15px] leading-6 text-slate-700 dark:text-slate-300">
               ¿Desea reactivar este activo en el inventario institucional?
               El activo volverá a estar disponible para asignación y
               reportes financieros.
@@ -156,7 +158,7 @@ export function ModalAltaActivo({
 
         {/* FOOTER */}
 
-        <div className="border-t bg-slate-100 px-8 py-4">
+        <div className="border-t border-slate-200 bg-slate-100 px-8 py-4 dark:bg-slate-950 dark:border-slate-700">
           <p className="text-sm text-slate-500">
             ℹ Esta acción será registrada en la bitácora de auditoría.
           </p>

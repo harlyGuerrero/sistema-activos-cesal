@@ -96,13 +96,13 @@ export function ModalBajaActivo({
           className="space-y-6"
         >
           {/* ACTIVO */}
-          <div className="rounded-2xl bg-slate-100 p-4">
+          <div className="rounded-2xl bg-slate-100 p-4 dark:bg-slate-950">
             <div className="text-sm font-semibold uppercase tracking-wide text-slate-500">
               ACTIVO SELECCIONADO
             </div>
 
             <div className="mt-2 flex items-center justify-between">
-              <span className="font-semibold text-lg">
+              <span className="font-semibold text-lg dark:text-slate-300">
                 {activo.nombre}
               </span>
 
@@ -192,7 +192,7 @@ export function ModalBajaActivo({
             </Field>
           </FieldGroup>
 
-          <DialogFooter className="border-t pt-5">
+          <DialogFooter className="border-t border-slate-200 pt-5">
             <Button
               type="button"
               variant="outline"
