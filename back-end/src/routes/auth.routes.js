@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/auth.controller');
 const { loginValidator } = require('../validators/auth.validator');
+const {validarJWT} = require('../middlewares/auth.middleware');
 
 /**
  * @swagger
@@ -72,5 +73,47 @@ const { loginValidator } = require('../validators/auth.validator');
  *         description: Error interno del servidor.
  */
 router.post('/login', loginValidator, authController.login);
+/**
+ * @swagger
+ * /api/auth/ChangePass:
+ *   post:
+ *     summary: Cambiar la contraseña temporal en el primer ingreso
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - nuevaPassword
+ *             properties:
+ *               nuevaPassword:
+ *                 type: string
+ *                 example: "MiNuevaPassword123"
+ *     responses:
+ *       200:
+ *         description: Contraseña actualizada con éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: SUCCESS
+ *                 message:
+ *                   type: string
+ *                   example: Contraseña actualizada correctamente. Ahora puedes usar el sistema.
+ *       400:
+ *         description: Datos inválidos
+ *       401:
+ *         description: Token inválido o no enviado
+ *       500:
+ *         description: Error interno del servidor
+ */
+router.post('/ChangePass',validarJWT,authController.cambiarPasswordInicial);
 
 module.exports = router;

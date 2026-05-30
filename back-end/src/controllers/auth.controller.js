@@ -22,4 +22,22 @@ async function login(req, res) {
     }
 }
 
-module.exports = { login };
+async function cambiarPasswordInicial(req, res) {
+    try {
+        const idUsuario = req.usuario.id;
+
+        const { nuevaPassword } = req.body;
+
+        const resultado = await authService.actualizarPasswordPrimeraVez(idUsuario, nuevaPassword);
+
+        return res.status(200).json(resultado);
+
+    } catch (error) {
+        console.error("Error en Cambiar Password Controller:", error);
+        return res.status(500).json({
+            status: 'ERROR',
+            message: 'Hubo un error interno en el servidor.'
+        });
+    }
+}
+module.exports = { login, cambiarPasswordInicial };
