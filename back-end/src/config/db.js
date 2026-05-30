@@ -1,6 +1,6 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
-const conexion = mysql.createPool({
+const connexion = mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
@@ -15,4 +15,4 @@ const conexion = mysql.createPool({
     keepAliveInitialDelay: 0
 });
 
-module.exports = conexion;
+module.exports = connexion;
