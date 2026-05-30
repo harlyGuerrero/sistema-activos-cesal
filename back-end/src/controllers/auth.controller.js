@@ -24,10 +24,11 @@ async function login(req, res) {
 
 async function cambiarPasswordInicial(req, res) {
     try {
+        const idUsuario = req.usuario.id;
 
-        const { id, nuevaPassword } = req.body;
+        const { nuevaPassword } = req.body;
 
-        const resultado = await authService.actualizarPasswordPrimeraVez(id, nuevaPassword);
+        const resultado = await authService.actualizarPasswordPrimeraVez(idUsuario, nuevaPassword);
 
         return res.status(200).json(resultado);
 

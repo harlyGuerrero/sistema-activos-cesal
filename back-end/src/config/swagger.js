@@ -10,6 +10,16 @@ const options = {
             version: '1.0.0',
             description: 'Documentación del sistema de gestión e inventario de activos.',
         },
+
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT', // Indica que usamos tokens JWT
+                }
+            }
+        },
         servers: [
             {
                 url: 'http://localhost:3000',

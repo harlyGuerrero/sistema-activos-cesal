@@ -44,7 +44,7 @@ async function actualizarPasswordPrimeraVez(usuarioId, nuevaPassword) {
     const saltRounds = 10;
     const passwordHasheado = await bcrypt.hash(nuevaPassword, saltRounds);
 
-    const [result] = await db.query('CALL sp_usuario_actualizar_password_inicial(?, ?)', [usuarioId, passwordHasheado]
+    const [result] = await db.query('CALL sp_usuarioActualizarPasswordInicial(?, ?)', [usuarioId, passwordHasheado]
     );
 
     return {
