@@ -72,5 +72,6 @@ const { loginValidator } = require('../validators/auth.validator');
  *         description: Error interno del servidor.
  */
 router.post('/login', loginValidator, authController.login);
+router.post('/ChangePass',authController.cambiarPasswordInicial);
 
 module.exports = router;

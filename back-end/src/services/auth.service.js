@@ -34,9 +34,28 @@ async function verificarCredenciales(correo, password) {
             id: usuario.id,
             nombre: usuario.nombreUsuario,
             apellido: usuario.apellido,
+            auth: usuario.auth,
             rol: usuario.nombreRol
         }
     };
 }
 
-module.exports = { verificarCredenciales };
+async function actualizarPasswordPrimeraVez(usuarioId, nuevaPassword) {
+    const saltRounds = 10;
+    const passwordHasheado = await bcrypt.hash(nuevaPassword, saltRounds);
+
+    const [result] = await db.query('CALL sp_usuario_actualizar_password_inicial(?, ?)', [usuarioId, passwordHasheado]
+    );
+
+    return {
+        status: 'SUCCESS',
+        message: 'Contraseña actualizada correctamente. Ahora puedes usar el sistema.'
+    };
+}
+
+module.exports = {
+    verificarCredenciales,
+    actualizarPasswordPrimeraVez
+};
+
+
