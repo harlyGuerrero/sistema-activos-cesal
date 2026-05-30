@@ -15,12 +15,10 @@ async function verificarCredenciales(correo, password) {
         return { status: 'INACTIVO', message: 'Tu cuenta está desactivada.' };
     }
 
-
     const passwordCorrecto = await bcrypt.compare(password, usuario.password);
     if (!passwordCorrecto) {
         return { status: 'ERROR', message: 'Correo o contraseña incorrectos.' };
     }
-
 
     const token = jwt.sign(
         { id: usuario.id, rol: usuario.nombreRol },
