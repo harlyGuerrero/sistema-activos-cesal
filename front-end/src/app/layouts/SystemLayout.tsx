@@ -40,7 +40,7 @@ export default function SystemLayout() {
 
             <Separator
               orientation="vertical"
-              className="!self-auto mr-2 h-4 dark:bg-slate-700"
+              className="!self-auto mr-2 ml-2 h-4 bg-slate-300 dark:bg-slate-700"
             />
 
             <AppBreadcrumb items={breadcrumbItems} />

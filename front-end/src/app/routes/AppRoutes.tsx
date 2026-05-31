@@ -2,12 +2,18 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import SystemLayout from "../layouts/SystemLayout";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import ActivosPage from "@/features/activos/pages/ActivosPage";
-import CrearActivo from "@/features/activos/pages/CrearActivo";
-import LoginPage from "@/features/login/pages/LoginPage";
-import CambiarContrasenia from "@/features/login/pages/CambiarContrasenia";
-import ContraseniaActualizada from "@/features/login/pages/ContraseniaActualizada";
+import LoginPage from "@/features/auth/pages/LoginPage";
+import CambiarContrasenia from "@/features/auth/pages/CambiarContrasenia";
+import ContraseniaActualizada from "@/features/auth/pages/ContraseniaActualizada";
 import ErrorPage from "../layouts/ErrorPage";
-
+import SeleccionarCategoriaActivo from "@/features/activos/pages/SeleccionarCategoriaActivo";
+import NuevoActivoInformatico from "@/features/activos/pages/categorias/NuevoActivoInformatico";
+import NuevoActivoOficina from "@/features/activos/pages/categorias/NuevoActivoOficina";
+import NuevoActivoMueble from "@/features/activos/pages/categorias/NuevoActivoMueble";
+import NuevoActivoVehicular from "@/features/activos/pages/categorias/NuevoActivoVehicular";
+import NuevoActivoMaquinaria from "@/features/activos/pages/categorias/NuevoActivoMaquinaria";
+import NuevoActivoInmueble from "@/features/activos/pages/categorias/NuevoActivoInmueble";
+import ProtectedRoute from "./ProtectedRoute";
 function PlaceholderPage({ title }: { title: string }) {
   return (
     <section>
@@ -29,24 +35,28 @@ const Router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage/>
+    element: <LoginPage />,
   },
   {
     path: "*",
-    element: <ErrorPage/>
+    element: <ErrorPage />,
   },
   {
     path: "/cambiar-contrasenia",
-    element: <CambiarContrasenia/>
+    element: <CambiarContrasenia />,
   },
   {
-path: "/contrasenia-actualizada",
-element: <ContraseniaActualizada/>
+    path: "/contrasenia-actualizada",
+    element: <ContraseniaActualizada />,
   },
 
   {
     path: "/",
-    element: <SystemLayout />,
+    element: (
+      <ProtectedRoute>
+        <SystemLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/dashboard",
@@ -57,8 +67,37 @@ element: <ContraseniaActualizada/>
         element: <ActivosPage />,
       },
       {
-            path: "/activos/crear",
-            element: <CrearActivo />,
+        path: "/activos/nuevo",
+        element: <SeleccionarCategoriaActivo />,
+      },
+      {
+        path: "/activos/nuevo/equipos-informaticos",
+        element: <NuevoActivoInformatico />,
+      },
+
+      {
+        path: "/activos/nuevo/equipos-oficina",
+        element: <NuevoActivoOficina />,
+      },
+
+      {
+        path: "/activos/nuevo/muebles-oficina",
+        element: <NuevoActivoMueble />,
+      },
+
+      {
+        path: "/activos/nuevo/bienes-vehiculares",
+        element: <NuevoActivoVehicular />,
+      },
+
+      {
+        path: "/activos/nuevo/equipos-maquinaria",
+        element: <NuevoActivoMaquinaria />,
+      },
+
+      {
+        path: "/activos/nuevo/bienes-inmuebles",
+        element: <NuevoActivoInmueble />,
       },
       {
         path: "/movimientos",

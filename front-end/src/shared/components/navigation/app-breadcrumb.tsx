@@ -43,7 +43,7 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
               </BreadcrumbItem>
 
               {!isLast && (
-                <BreadcrumbSeparator className="flex items-center justify-center text-slate-300 [&>svg]:size-4" />
+                <BreadcrumbSeparator className="flex items-center justify-center text-slate-300 [&>svg]:size-4 " />
               )}
             </Fragment>
           )
