@@ -78,7 +78,7 @@ router.post('/login', loginValidator, authController.login);
  * /api/auth/ChangePass:
  *   post:
  *     summary: Cambiar la contraseña temporal en el primer ingreso
- *     tags: [Auth]
+ *     tags: [Autenticación]
  *     security:
  *       - bearerAuth: []
  *     requestBody:

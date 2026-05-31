@@ -21,7 +21,7 @@ async function verificarCredenciales(correo, password) {
     }
 
     const token = jwt.sign(
-        { id: usuario.id, rol: usuario.nombreRol },
+        { id: usuario.id, correo: usuario.correo, idRol: usuario.idRol},
         process.env.JWT_SECRET,
         { expiresIn: '8h' }
     );
@@ -35,7 +35,8 @@ async function verificarCredenciales(correo, password) {
             nombre: usuario.nombreUsuario,
             apellido: usuario.apellido,
             auth: usuario.auth,
-            rol: usuario.nombreRol
+            idRol: usuario.idRol,
+            nombreRol: usuario.nombreRol
         }
     };
 }
