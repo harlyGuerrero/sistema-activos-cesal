@@ -8,12 +8,8 @@ import ContraseniaActualizada from "@/features/auth/pages/ContraseniaActualizada
 import ErrorPage from "../layouts/ErrorPage";
 import SeleccionarCategoriaActivo from "@/features/activos/pages/SeleccionarCategoriaActivo";
 import NuevoActivoInformatico from "@/features/activos/pages/categorias/NuevoActivoInformatico";
-import NuevoActivoOficina from "@/features/activos/pages/categorias/NuevoActivoOficina";
-import NuevoActivoMueble from "@/features/activos/pages/categorias/NuevoActivoMueble";
-import NuevoActivoVehicular from "@/features/activos/pages/categorias/NuevoActivoVehicular";
-import NuevoActivoMaquinaria from "@/features/activos/pages/categorias/NuevoActivoMaquinaria";
-import NuevoActivoInmueble from "@/features/activos/pages/categorias/NuevoActivoInmueble";
-import ProtectedRoute from "./ProtectedRoute";
+
+// import ProtectedRoute from "./ProtectedRoute";
 function PlaceholderPage({ title }: { title: string }) {
   return (
     <section>
@@ -53,9 +49,9 @@ const Router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ProtectedRoute>
-        <SystemLayout />
-      </ProtectedRoute>
+      // <ProtectedRoute>
+      <SystemLayout />
+      // </ProtectedRoute>
     ),
     children: [
       {
@@ -73,31 +69,6 @@ const Router = createBrowserRouter([
       {
         path: "/activos/nuevo/equipos-informaticos",
         element: <NuevoActivoInformatico />,
-      },
-
-      {
-        path: "/activos/nuevo/equipos-oficina",
-        element: <NuevoActivoOficina />,
-      },
-
-      {
-        path: "/activos/nuevo/muebles-oficina",
-        element: <NuevoActivoMueble />,
-      },
-
-      {
-        path: "/activos/nuevo/bienes-vehiculares",
-        element: <NuevoActivoVehicular />,
-      },
-
-      {
-        path: "/activos/nuevo/equipos-maquinaria",
-        element: <NuevoActivoMaquinaria />,
-      },
-
-      {
-        path: "/activos/nuevo/bienes-inmuebles",
-        element: <NuevoActivoInmueble />,
       },
       {
         path: "/movimientos",
