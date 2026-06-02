@@ -187,19 +187,24 @@ export function TablaActivos() {
         </div>
 
         {/* DESKTOP TABLE */}
-        {/* DESKTOP TABLE */}
-        <div className="hidden lg:block">
+        <div className="hidden md:block">
           <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
-            <div className="max-h-150 overflow-auto">
-              <Table>
+            <div className="overflow-x-auto">
+              <Table className="min-w-[1100px]">
                 <TableHeader className="sticky top-0 z-10 bg-slate-50 dark:bg-slate-900">
                   <TableRow className="border-slate-200 dark:border-slate-800">
                     <TableHead className="pl-6">Código</TableHead>
-                    <TableHead>Nro. Factura</TableHead>
+                    <TableHead className="hidden xl:table-cell">
+                      Nro. Factura
+                    </TableHead>
                     <TableHead>Activo</TableHead>
-                    <TableHead>Categoría</TableHead>
+                    <TableHead className="hidden xl:table-cell">
+                      Categoría
+                    </TableHead>
                     <TableHead>Ubicación</TableHead>
-                    <TableHead>Proyecto</TableHead>
+                    <TableHead className="hidden 2xl:table-cell">
+                      Proyecto
+                    </TableHead>
                     <TableHead>Estado</TableHead>
                     <TableHead className="text-center">Acciones</TableHead>
                   </TableRow>
@@ -228,7 +233,7 @@ export function TablaActivos() {
                         </TableCell>
 
                         {/* FACTURA */}
-                        <TableCell>
+                        <TableCell className="hidden xl:table-cell">
                           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                             {asset.factura}
                           </span>
@@ -254,7 +259,7 @@ export function TablaActivos() {
                         </TableCell>
 
                         {/* CATEGORÍA */}
-                        <TableCell>
+                        <TableCell className="hidden xl:table-cell">
                           <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
                             {asset.categoria}
                           </div>
@@ -270,7 +275,7 @@ export function TablaActivos() {
                         </TableCell>
 
                         {/* PROYECTO */}
-                        <TableCell>
+                        <TableCell className="hidden 2xl:table-cell">
                           <span className="rounded-lg bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300">
                             {asset.codigoProyecto}
                           </span>
@@ -336,7 +341,7 @@ export function TablaActivos() {
         </div>
 
         {/* MOBILE CARDS */}
-        <div className="space-y-4 lg:hidden">
+        <div className="space-y-4 md:hidden">
           {filteredAssets.map((asset) => {
             const Icon = asset.icon;
 
@@ -433,23 +438,23 @@ export function TablaActivos() {
           </div>
         </div>
         {activoSeleccionado && (
-          <ModalBajaActivo
-            isOpen={modalBajaOpen}
-            onClose={() => {
-              setModalBajaOpen(false);
-              setActivoSeleccionado(null);
-            }}
-            activo={{
-              codigo: activoSeleccionado.codigo,
-              nombre: activoSeleccionado.nombre,
-            }}
-          />
-        )}
-        {activoSeleccionado && (
-          <ModalAltaActivo
-            isOpen={modalAltaOpen}
-            onClose={() => setModalAltaOpen(false)}
-          />
+          <div>
+            <ModalBajaActivo
+              isOpen={modalBajaOpen}
+              onClose={() => {
+                setModalBajaOpen(false);
+                setActivoSeleccionado(null);
+              }}
+              activo={{
+                codigo: activoSeleccionado.codigo,
+                nombre: activoSeleccionado.nombre,
+              }}
+            />
+            <ModalAltaActivo
+              isOpen={modalAltaOpen}
+              onClose={() => setModalAltaOpen(false)}
+            />
+          </div>
         )}
       </CardContent>
     </Card>
