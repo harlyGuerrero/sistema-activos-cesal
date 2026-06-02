@@ -6,6 +6,8 @@ const authRoutes = require('../routes/auth.routes');
 
 const userRoutes = require('../routes/user.routes');
 
+const rolRoutes = require('../routes/rol.routes');
+
 
 const { swaggerDocs } = require('../config/swagger');
 
@@ -18,7 +20,7 @@ app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-
+app.use('/api/roles', rolRoutes);
 
 swaggerDocs(app);
 
