@@ -72,7 +72,7 @@ export function ModalBajaActivo({
       open={isOpen}
       onOpenChange={onClose}
     >
-      <DialogContent className="max-w-xl rounded-3xl border-none shadow-lg">
+      <DialogContent className="w-[calc(100%-2rem)] max-w-180 rounded-3xl border-none shadow-lg">
         <DialogHeader>
           <div className="flex gap-4">
             <div className="flex h-20 w-28 items-center justify-center rounded-full bg-red-100">
