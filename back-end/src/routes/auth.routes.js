@@ -107,12 +107,26 @@ router.post('/login', loginValidator, authController.login);
  *                 message:
  *                   type: string
  *                   example: Contraseña actualizada correctamente. Ahora puedes usar el sistema.
+ *                 token:
+ *                   type: string
+ *                   example: eyW9cd...
  *       400:
- *         description: Datos inválidos
+ *         description: Intento de realizar nuevamente el cambio inicial de contraseña.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: ERROR
+ *                 message:
+ *                   type: string
+ *                   example: Este usuario ya completó su primer cambio de contraseña.
  *       401:
- *         description: Token inválido o no enviado
+ *         description: Token inválido o no enviado.
  *       500:
- *         description: Error interno del servidor
+ *         description: Error interno del servidor.
  */
 router.post('/ChangePass',validarJWT,authController.cambiarPasswordInicial);
 
