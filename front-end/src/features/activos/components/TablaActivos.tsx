@@ -341,91 +341,177 @@ export function TablaActivos() {
         </div>
 
         {/* MOBILE CARDS */}
-        <div className="space-y-4 md:hidden">
-          {filteredAssets.map((asset) => {
-            const Icon = asset.icon;
+        <div className="space-y-8 md:hidden">
+  {filteredAssets.map((asset) => {
+    const Icon = asset.icon;
 
-            return (
-              <div key={asset.codigo} className="rounded-2xl border p-4">
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-5">
-                      <Icon className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="font-medium dark:text-slate-400">
-                        {asset.nombre}
-                      </p>
-                      <p className="text-xs text-slate-500">{asset.codigo}</p>
-                    </div>
-                  </div>
+    return (
+      <Card
+        key={asset.codigo}
+        className="
+          overflow-hidden
+          rounded-2xl
+          border
+          border-slate-200
+          bg-white
+          shadow-sm
+          ring-0
+          dark:border-slate-800
+          dark:bg-slate-950
+        "
+      >
+        {/* HEADER */}
 
-                  <div
-                    className={`rounded-full flex items-center gap-1.5 px-3 py-1 text-xs font-medium ${badgeStyles[asset.estado]}`}
-                  >
-                    {statusIcons[asset.estado]}
-                    <span>{asset.estado}</span>
-                  </div>
-                </div>
+        <div className="flex items-start justify-between p-5">
+          <div className="flex items-start gap-3">
+            <div className="mt-1">
+              <Icon className="h-6 w-6 text-slate-700" />
+            </div>
 
-                <div className="space-y-1 text-sm text-slate-600 dark:text-slate-400">
-                  <p>
-                    <strong>Nro. Factura:</strong> {asset.proveedor}
-                  </p>
-                  <p>
-                    <strong>Código Proveedor:</strong> {asset.proveedor}
-                  </p>
-                  <p>
-                    <strong>Categoría:</strong> {asset.categoria}
-                  </p>
-                  <p>
-                    <strong>Sede:</strong> {asset.sede}
-                  </p>
-                  <p>
-                    <strong>Proyecto:</strong> {asset.codigoProyecto}
-                  </p>
-                </div>
+            <div>
+              <h3 className="text-lg font-semibold text-slate-900">
+                {asset.nombre}
+              </h3>
 
-                <div className="mt-4 flex gap-4">
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    className="h-8 w-8 rounded-lg"
-                  >
-                    <Eye className="h-4 w-4 text-blue-600 dark:text-slate-300" />
-                  </Button>
+              <p className="mt-1 text-sm text-slate-500">
+                {asset.codigo}
+              </p>
+            </div>
+          </div>
 
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    className="h-8 w-8 rounded-lg"
-                  >
-                    <Pencil className="h-4 w-4 text-blue-600" />
-                  </Button>
-                  {asset.estado !== "Baja" ? (
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="h-8 w-8 rounded-lg hover:bg-red-50 dark:hover:bg-red-950"
-                      onClick={() => abrirModalBaja(asset)}
-                    >
-                      <ArchiveX className="h-4 w-4 cursor-pointer text-red-500" />
-                    </Button>
-                  ) : (
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="h-8 w-8 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950"
-                      onClick={() => abrirModalAlta(asset)}
-                    >
-                      <ArchiveRestore className="h-4 w-4 cursor-pointer text-blue-600" />
-                    </Button>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+          <div
+            className={`
+              flex
+              items-center
+              gap-1.5
+              rounded-full
+              px-3
+              py-1.5
+              text-xs
+              font-semibold
+              ${badgeStyles[asset.estado]}
+            `}
+          >
+            {statusIcons[asset.estado]}
+            <span>{asset.estado}</span>
+          </div>
         </div>
+
+        {/* DIVIDER */}
+
+        <div className="border-t border-slate-200" />
+
+        {/* INFORMACIÓN */}
+
+        <div className="grid grid-cols-2 gap-x-6 gap-y-5 p-5">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              Nro. Factura
+            </p>
+
+            <p className="mt-1 text-sm font-semibold text-slate-900">
+              {asset.factura}
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              Código Proveedor
+            </p>
+
+            <p className="mt-1 text-sm font-semibold text-slate-900">
+              {asset.proveedor}
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              Categoría
+            </p>
+
+            <p className="mt-1 text-sm font-semibold text-slate-900">
+              {asset.categoria}
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              Sede
+            </p>
+
+            <p className="mt-1 text-sm font-semibold text-slate-900">
+              {asset.sede}
+            </p>
+          </div>
+
+          <div className="col-span-2">
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              Proyecto
+            </p>
+
+            <p className="mt-1 text-sm font-semibold text-slate-900">
+              {asset.codigoProyecto}
+            </p>
+          </div>
+        </div>
+
+        {/* FOOTER */}
+
+        <div className="border-t border-slate-200">
+          <div className="flex items-center justify-end gap-3 pt-4 pr-4">
+            <Button
+              size="icon"
+              variant="outline"
+              className="h-11 w-11 rounded-xl border-slate-300 bg-slate-100"
+            >
+              <Eye className="h-5 w-5 text-slate-600" />
+            </Button>
+
+            <Button
+              size="icon"
+              variant="outline"
+              className="h-11 w-11 rounded-xl border-slate-300 bg-slate-100"
+            >
+              <Pencil className="h-5 w-5 text-slate-600" />
+            </Button>
+
+            {asset.estado !== "Baja" ? (
+              <Button
+                size="icon"
+                variant="outline"
+                className="
+                  h-11
+                  w-11
+                  rounded-xl
+                  border-red-200
+                  hover:bg-red-50
+                "
+                onClick={() => abrirModalBaja(asset)}
+              >
+                <ArchiveX className="h-5 w-5 text-red-500" />
+              </Button>
+            ) : (
+              <Button
+                size="icon"
+                variant="outline"
+                className="
+                  h-11
+                  w-11
+                  rounded-xl
+                  border-blue-200
+                  hover:bg-blue-50
+                "
+                onClick={() => abrirModalAlta(asset)}
+              >
+                <ArchiveRestore className="h-5 w-5 text-blue-600" />
+              </Button>
+            )}
+          </div>
+        </div>
+      </Card>
+    );
+  })}
+</div>
 
         {/* PAGINACIÓN */}
         <div className="mt-6 flex items-center justify-between text-sm text-slate-500">

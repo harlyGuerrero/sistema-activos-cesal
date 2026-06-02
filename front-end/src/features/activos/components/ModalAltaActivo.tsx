@@ -45,11 +45,11 @@ export function ModalAltaActivo({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-180 overflow-hidden rounded-[28px] p-0">
+      <DialogContent className="w-[calc(100%-2rem)] max-w-180 overflow-hidden rounded-[28px] p-0 ">
 
         {/* HEADER */}
 
-        <div className="px-8 pt-8">
+      <div className="px-5 pt-6 sm:px-8 sm:pt-8">
           <div className="flex items-start justify-between">
             <div className="flex gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-slate-100">
@@ -71,7 +71,7 @@ export function ModalAltaActivo({
 
         {/* BODY */}
 
-        <div className="space-y-6 px-8 py-6">
+        <div className="space-y-6 px-5 py-5 sm:px-8 sm:py-6">
 
           {/* MENSAJE */}
 

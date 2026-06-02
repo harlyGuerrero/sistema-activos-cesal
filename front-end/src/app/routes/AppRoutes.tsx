@@ -9,7 +9,7 @@ import ErrorPage from "../layouts/ErrorPage";
 import SeleccionarCategoriaActivo from "@/features/activos/pages/SeleccionarCategoriaActivo";
 import NuevoActivoInformatico from "@/features/activos/pages/categorias/NuevoActivoInformatico";
 
-import ProtectedRoute from "./ProtectedRoute";
+// import ProtectedRoute from "./ProtectedRoute";
 function PlaceholderPage({ title }: { title: string }) {
   return (
     <section>
@@ -49,9 +49,9 @@ const Router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ProtectedRoute>
+      // <ProtectedRoute>
       <SystemLayout />
-      </ProtectedRoute>
+      // </ProtectedRoute>
     ),
     children: [
       {
