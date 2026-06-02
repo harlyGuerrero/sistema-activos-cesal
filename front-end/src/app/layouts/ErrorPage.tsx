@@ -13,7 +13,7 @@ export default function ErrorPage() {
           Lo siento, no encontramos la página localizada.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-          <Link to="/">
+          <Link to="/dashboard">
             <Button
               className="rounded-md bg-blue-600 px-3.5 py-5 text-sm font-semibold text-white shadow-xs hover:bg-blue-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
