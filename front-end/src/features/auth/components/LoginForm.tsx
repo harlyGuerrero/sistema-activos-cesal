@@ -27,6 +27,14 @@ import { LoginSchema, type LoginFormData } from "../schemas/LoginSchema";
 import { login } from "../api/auth.service";
 import { useAuthStore } from "../store/authStore";
 
+// import { AlertCircleIcon } from "lucide-react"
+// import {
+//   Alert,
+//   AlertDescription,
+//   AlertTitle,
+// } from "@/shared/ui/alert"
+
+
 export function LoginForm({ ...props }: React.ComponentProps<"div">) {
   const navigate = useNavigate();
   const setSession = useAuthStore((state) => state.setSession);
@@ -53,7 +61,9 @@ export function LoginForm({ ...props }: React.ComponentProps<"div">) {
         return;
       }
 
-      navigate("/dashboard");
+      navigate("/dashboard", {
+        replace: true,
+      });
     } catch (error) {
       console.error(error);
 

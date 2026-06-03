@@ -299,7 +299,7 @@ export function TablaActivos() {
                               variant="ghost"
                               className="h-8 w-8 rounded-lg"
                             >
-                              <Eye className="h-4 w-4 text-blue-600 dark:text-slate-300" />
+                              <Eye className="h-4 w-4 text-slate-600 dark:text-slate-300" />
                             </Button>
 
                             <Button
@@ -307,7 +307,7 @@ export function TablaActivos() {
                               variant="ghost"
                               className="h-8 w-8 rounded-lg"
                             >
-                              <Pencil className="h-4 w-4 text-blue-600" />
+                              <Pencil className="h-4 w-4 text-slate-600" />
                             </Button>
 
                             {asset.estado !== "Baja" ? (
