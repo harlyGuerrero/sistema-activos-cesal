@@ -76,7 +76,6 @@ export default function NuevoActivoInformatico() {
             Volver
           </Button>
         </Link>
-
         <Button type="submit">Guardar Activo</Button>
       </div>
     </form>
