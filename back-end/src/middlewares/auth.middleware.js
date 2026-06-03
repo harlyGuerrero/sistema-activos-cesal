@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
-
+const db = require('../config/db'); //
 const validarJWT = (req, res, next) => {
 
     const authHeader = req.header('Authorization');
-
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({
@@ -28,6 +27,7 @@ const validarJWT = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
+
     if (req.usuario && req.usuario.idRol == 1) {
         next();
     }else{
@@ -38,7 +38,34 @@ const isAdmin = (req, res, next) => {
     }
 }
 
+const isActive = async (req, res, next) => {
+
+    try{
+        const id = req.usuario.id;
+        const [rows] = await db.query('select idRol, isActive from usuario where id = ?',[id])
+        const user = rows[0];
+
+        if (!user || user.isActive == 0) {
+            return res.status(403).json({
+                status: 'ERROR',
+                message: 'Acceso denegado. Esta cuenta ya no se encuentra activa.'
+            });
+        }
+        req.usuario.idRol = user.idRol;
+        next();
+    }catch(error){
+        console.error('Error en isActive:', error);
+        return res.status(500).json({
+            status: 'ERROR',
+            message: error.message
+        });
+    }
+
+
+
+}
 module.exports = {
     validarJWT: validarJWT,
     isAdmin: isAdmin,
+    isActive: isActive,
 };

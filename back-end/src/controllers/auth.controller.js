@@ -23,6 +23,7 @@ async function login(req, res) {
 }
 
 async function cambiarPasswordInicial(req, res) {
+
     try {
         const usuarioLogueado = req.usuario.id;
 
@@ -30,21 +31,23 @@ async function cambiarPasswordInicial(req, res) {
 
         const resultado = await authService.actualizarPasswordPrimeraVez(usuarioLogueado, nuevaPassword);
 
-        if (resultado) {
+        return res.status(200).json(resultado);
+
+    } catch (error) {
+        console.error("Error en Cambiar Password Controller:", error);
+        if (error.message === 'PASSWORD_ALREADY_CHANGED') {
             return res.status(401).json({
                 status: 'ERROR',
                 message: 'Este usuario ya completó su primer cambio de contraseña. Utiliza el módulo de perfil regular.'
             });
         }
 
-        return res.status(200).json(resultado);
-
-    } catch (error) {
-        console.error("Error en Cambiar Password Controller:", error);
         return res.status(500).json({
             status: 'ERROR',
             message: 'Hubo un error interno en el servidor.'
         });
     }
 }
+
+
 module.exports = { login, cambiarPasswordInicial };
