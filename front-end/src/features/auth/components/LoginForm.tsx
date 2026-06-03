@@ -34,7 +34,6 @@ import { useAuthStore } from "../store/authStore";
 //   AlertTitle,
 // } from "@/shared/ui/alert"
 
-
 export function LoginForm({ ...props }: React.ComponentProps<"div">) {
   const navigate = useNavigate();
   const setSession = useAuthStore((state) => state.setSession);
@@ -57,10 +56,13 @@ export function LoginForm({ ...props }: React.ComponentProps<"div">) {
       setSession(response.token, response.user);
 
       if (response.user.auth === 1) {
-        navigate("/cambiar-contrasenia");
+        navigate("/cambiar-contrasenia", {
+          replace: true,
+        });
         return;
       }
-
+      setSession(response.token, response.user);
+      window.history.pushState(null, "", "/dashboard");
       navigate("/dashboard", {
         replace: true,
       });

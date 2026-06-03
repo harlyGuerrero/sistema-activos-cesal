@@ -11,8 +11,10 @@ import {
 } from "@/shared/ui/sidebar";
 
 import { Separator } from "@/shared/ui/separator";
+import { useLastRoute } from "@/features/auth/hooks/useLastRoute";
 
 export default function SystemLayout() {
+   useLastRoute();
   const location = useLocation();
 
   const breadcrumbItems = useMemo(() => {

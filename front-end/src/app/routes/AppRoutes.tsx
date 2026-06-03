@@ -10,6 +10,38 @@ import SeleccionarCategoriaActivo from "@/features/activos/pages/SeleccionarCate
 import NuevoActivoInformatico from "@/features/activos/pages/categorias/NuevoActivoInformatico";
 
 import ProtectedRoute from "./ProtectedRoute";
+import { useAuthStore } from "@/features/auth/store/authStore";
+
+interface GuestGuardProps {
+  children: React.ReactNode;
+}
+
+function GuestGuard({ children }: GuestGuardProps) {
+  const token = useAuthStore((state) => state.token);
+
+  if (token) {
+    const lastRoute = localStorage.getItem("lastRoute") || "/dashboard";
+
+    return <Navigate to={lastRoute} replace />;
+  }
+
+  return children;
+}
+
+interface AuthGuardProps {
+  children: React.ReactNode;
+}
+
+function AuthGuard({ children }: AuthGuardProps) {
+  const token = useAuthStore((state) => state.token);
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
 function PlaceholderPage({ title }: { title: string }) {
   return (
     <section>
@@ -31,7 +63,11 @@ const Router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: (
+      <GuestGuard>
+        <LoginPage />
+      </GuestGuard>
+    ),
   },
   {
     path: "*",
@@ -50,7 +86,9 @@ const Router = createBrowserRouter([
     path: "/",
     element: (
       <ProtectedRoute>
-      <SystemLayout />
+        <AuthGuard>
+          <SystemLayout />
+        </AuthGuard>
       </ProtectedRoute>
     ),
     children: [
