@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const helmet = require('helmet');
 
 const authRoutes = require('../routes/auth.routes');
 
@@ -16,6 +16,11 @@ const { swaggerDocs } = require('../config/swagger');
 
 const app = express();
 
+app.use(
+    helmet({
+        contentSecurityPolicy: false
+    })
+);
 
 app.use(express.json());
 app.use(cors());

@@ -21,7 +21,7 @@ async function verificarCredenciales(correo, password) {
     }
 
     const token = jwt.sign(
-        { id: usuario.id, correo: usuario.correo, idRol: usuario.idRol},
+        { id: usuario.id, correo: usuario.correo, idRol: usuario.idRol, isAuth: usuario.auth},
         process.env.JWT_SECRET,
         { expiresIn: '8h' }
     );
@@ -42,15 +42,32 @@ async function verificarCredenciales(correo, password) {
 }
 
 async function actualizarPasswordPrimeraVez(usuarioId, nuevaPassword) {
+
+    const [rows] = await db.query('select isAuth from usuario where id = ?', [usuarioId]);
+    const usuario = rows[0];
+
+    if (!usuario || usuario.auth === 0) {
+        return res.status(400).json({
+            status: 'ERROR',
+            message: 'Seguridad: Este token temporal ya caducó porque la contraseña ya fue cambiada.'
+        });
+    }
+
     const saltRounds = 10;
     const passwordHasheado = await bcrypt.hash(nuevaPassword, saltRounds);
 
-    const [result] = await db.query('CALL sp_usuarioActualizarPasswordInicial(?, ?)', [usuarioId, passwordHasheado]
+    const [result] = await db.query('CALL sp_usuarioActualizarPasswordInicial(?, ?)', [usuarioId, passwordHasheado]);
+
+    const newToken = jwt.sign(
+        { id: usuario.id, correo: usuario.correo, idRol: usuario.idRol, isAuth: usuario.auth},
+        process.env.JWT_SECRET,
+        { expiresIn: '8h' }
     );
 
     return {
         status: 'SUCCESS',
-        message: 'Contraseña actualizada correctamente. Ahora puedes usar el sistema.'
+        message: 'Contraseña actualizada correctamente. Bienvenido al sistema.',
+        token: newToken
     };
 }
 
