@@ -299,7 +299,7 @@ export function TablaActivos() {
                               variant="ghost"
                               className="h-8 w-8 rounded-lg"
                             >
-                              <Eye className="h-4 w-4 text-blue-600 dark:text-slate-300" />
+                              <Eye className="h-4 w-4 text-slate-600 dark:text-slate-300" />
                             </Button>
 
                             <Button
@@ -307,7 +307,7 @@ export function TablaActivos() {
                               variant="ghost"
                               className="h-8 w-8 rounded-lg"
                             >
-                              <Pencil className="h-4 w-4 text-blue-600" />
+                              <Pencil className="h-4 w-4 text-slate-600" />
                             </Button>
 
                             {asset.estado !== "Baja" ? (
@@ -365,15 +365,15 @@ export function TablaActivos() {
         <div className="flex items-start justify-between p-5">
           <div className="flex items-start gap-3">
             <div className="mt-1">
-              <Icon className="h-6 w-6 text-slate-700" />
+              <Icon className="h-6 w-6 text-slate-700 dark:text-slate-300" />
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-300">
                 {asset.nombre}
               </h3>
 
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                 {asset.codigo}
               </p>
             </div>
@@ -399,57 +399,57 @@ export function TablaActivos() {
 
         {/* DIVIDER */}
 
-        <div className="border-t border-slate-200" />
+        <div className="border-t border-slate-200 dark:border-slate-600" />
 
         {/* INFORMACIÓN */}
 
         <div className="grid grid-cols-2 gap-x-6 gap-y-5 p-5">
           <div>
-            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-300">
               Nro. Factura
             </p>
 
-            <p className="mt-1 text-sm font-semibold text-slate-900">
+            <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-500">
               {asset.factura}
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-300">
               Código Proveedor
             </p>
 
-            <p className="mt-1 text-sm font-semibold text-slate-900">
+            <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-500">
               {asset.proveedor}
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-300">
               Categoría
             </p>
 
-            <p className="mt-1 text-sm font-semibold text-slate-900">
+            <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-500">
               {asset.categoria}
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-300">
               Sede
             </p>
 
-            <p className="mt-1 text-sm font-semibold text-slate-900">
+            <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-500">
               {asset.sede}
             </p>
           </div>
 
           <div className="col-span-2">
-            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-300">
               Proyecto
             </p>
 
-            <p className="mt-1 text-sm font-semibold text-slate-900">
+            <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-500">
               {asset.codigoProyecto}
             </p>
           </div>
@@ -457,7 +457,7 @@ export function TablaActivos() {
 
         {/* FOOTER */}
 
-        <div className="border-t border-slate-200">
+        <div className="border-t border-slate-200 dark:border-slate-600">
           <div className="flex items-center justify-end gap-3 pt-4 pr-4">
             <Button
               size="icon"

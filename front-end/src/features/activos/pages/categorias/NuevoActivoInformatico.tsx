@@ -12,6 +12,7 @@ import { InformacionPatrimonial } from "../../components/sections/InformacionPat
 import { EspecificacionesTecnicasInformatico } from "../../components/sections/EspecificacionesTecnicasInformatico";
 import { useState } from "react";
 import { RegistroFotografico } from "../../components/sections/RegistroFotografico";
+import { Link } from "react-router";
 
 export default function NuevoActivoInformatico() {
   const form = useForm<ActivoInformaticoFormData>({
@@ -70,11 +71,14 @@ export default function NuevoActivoInformatico() {
       </div>
 
       <div className="flex justify-end gap-3">
-        <Button type="button" variant="outline">
-          Cancelar
+        <Link to="/activos/nuevo">
+          <Button variant="outline" className="cursor-pointer">
+            Volver
+          </Button>
+        </Link>
+        <Button type="submit" className="cursor-pointer">
+          Guardar Activo
         </Button>
-
-        <Button type="submit">Guardar Activo</Button>
       </div>
     </form>
   );

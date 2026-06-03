@@ -27,6 +27,14 @@ import { LoginSchema, type LoginFormData } from "../schemas/LoginSchema";
 import { login } from "../api/auth.service";
 import { useAuthStore } from "../store/authStore";
 
+// import { AlertCircleIcon } from "lucide-react"
+// import {
+//   Alert,
+//   AlertDescription,
+//   AlertTitle,
+// } from "@/shared/ui/alert"
+
+
 export function LoginForm({ ...props }: React.ComponentProps<"div">) {
   const navigate = useNavigate();
   const setSession = useAuthStore((state) => state.setSession);
@@ -53,7 +61,9 @@ export function LoginForm({ ...props }: React.ComponentProps<"div">) {
         return;
       }
 
-      navigate("/dashboard");
+      navigate("/dashboard", {
+        replace: true,
+      });
     } catch (error) {
       console.error(error);
 
@@ -98,7 +108,7 @@ export function LoginForm({ ...props }: React.ComponentProps<"div">) {
                 </div>
 
                 <p className="mt-7 max-w-[285px] text-[15px] leading-7 text-white/95">
-                  Control integral de activos fijos e infraestructura
+                  Control SOlecita integral de activos fijos e infraestructura
                   institucional con los más altos estándares de seguridad y
                   eficiencia gubernamental.
                 </p>
