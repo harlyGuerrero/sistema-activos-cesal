@@ -24,11 +24,18 @@ async function login(req, res) {
 
 async function cambiarPasswordInicial(req, res) {
     try {
-        const idUsuario = req.usuario.id;
+        const usuarioLogueado = req.usuario.id;
 
         const { nuevaPassword } = req.body;
 
-        const resultado = await authService.actualizarPasswordPrimeraVez(idUsuario, nuevaPassword);
+        const resultado = await authService.actualizarPasswordPrimeraVez(usuarioLogueado, nuevaPassword);
+
+        if (resultado) {
+            return res.status(401).json({
+                status: 'ERROR',
+                message: 'Este usuario ya completó su primer cambio de contraseña. Utiliza el módulo de perfil regular.'
+            });
+        }
 
         return res.status(200).json(resultado);
 
