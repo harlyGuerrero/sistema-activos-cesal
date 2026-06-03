@@ -81,7 +81,7 @@ export default function SeleccionarCategoriaActivoPage() {
       {/* Breadcrumb */}
       <div className="space-y-3">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-300">
             Clasificación inicial del activo
           </h1>
 
@@ -105,13 +105,13 @@ export default function SeleccionarCategoriaActivoPage() {
               className="
                 cursor-pointer
                 rounded-3xl
-                border
-                border-slate-100
+                shadow
                 transition-all
                 duration-200
                 hover:-translate-y-1
                 hover:border-[#006BA6]
                 hover:shadow-xl
+                ring-0
               "
             >
               <CardContent className="flex h-full flex-col p-6">
@@ -132,12 +132,12 @@ export default function SeleccionarCategoriaActivoPage() {
                 </div>
 
                 {/* Título */}
-                <h3 className="mb-3 text-2xl font-semibold text-slate-900">
+                <h3 className="mb-3 text-2xl font-semibold text-slate-900 dark:text-slate-300">
                   {categoria.titulo}
                 </h3>
 
                 {/* Descripción */}
-                <p className="mb-8 flex-1 text-sm leading-6 text-slate-500">
+                <p className="mb-8 flex-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
                   {categoria.descripcion}
                 </p>
 

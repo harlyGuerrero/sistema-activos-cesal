@@ -90,7 +90,7 @@ export default function ActivosPage() {
 
           <Link
             to="/activos/nuevo"
-            className="w-full lg:w-auto"
+            className="w-full lg:w-auto "
           >
             <Button
               className="
@@ -99,7 +99,7 @@ export default function ActivosPage() {
                 text-white
                 shadow
                 hover:bg-blue-700
-                lg:w-auto
+                lg:w-auto cursor-pointer
               "
             >
               <Plus />

@@ -72,11 +72,13 @@ export default function NuevoActivoInformatico() {
 
       <div className="flex justify-end gap-3">
         <Link to="/activos/nuevo">
-          <Button type="button" variant="outline">
+          <Button variant="outline" className="cursor-pointer">
             Volver
           </Button>
         </Link>
-        <Button type="submit">Guardar Activo</Button>
+        <Button type="submit" className="cursor-pointer">
+          Guardar Activo
+        </Button>
       </div>
     </form>
   );
