@@ -108,7 +108,7 @@ export function LoginForm({ ...props }: React.ComponentProps<"div">) {
                 </div>
 
                 <p className="mt-7 max-w-[285px] text-[15px] leading-7 text-white/95">
-                  Control integral de activos fijos e infraestructura
+                  Control SOlecita integral de activos fijos e infraestructura
                   institucional con los más altos estándares de seguridad y
                   eficiencia gubernamental.
                 </p>
