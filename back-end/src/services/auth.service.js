@@ -43,23 +43,20 @@ async function verificarCredenciales(correo, password) {
 
 async function actualizarPasswordPrimeraVez(usuarioId, nuevaPassword) {
 
-    const [rows] = await db.query('select isAuth from usuario where id = ?', [usuarioId]);
+    const [rows] = await db.query('select id, correo, idRol, isAuth from usuario where id = ?', [usuarioId]);
     const usuario = rows[0];
 
-    if (!usuario || usuario.auth === 0) {
-        return res.status(400).json({
-            status: 'ERROR',
-            message: 'Seguridad: Este token temporal ya caducó porque la contraseña ya fue cambiada.'
-        });
+    if (!usuario || usuario.isAuth === 0) {
+        throw new Error('PASSWORD_ALREADY_CHANGED');
     }
 
     const saltRounds = 10;
     const passwordHasheado = await bcrypt.hash(nuevaPassword, saltRounds);
 
-    const [result] = await db.query('CALL sp_usuarioActualizarPasswordInicial(?, ?)', [usuarioId, passwordHasheado]);
+    await db.query('CALL sp_usuarioActualizarPasswordInicial(?, ?)', [usuarioId, passwordHasheado]);
 
     const newToken = jwt.sign(
-        { id: usuario.id, correo: usuario.correo, idRol: usuario.idRol, isAuth: usuario.auth},
+        { id: usuario.id, correo: usuario.correo, idRol: usuario.idRol, isAuth:0},
         process.env.JWT_SECRET,
         { expiresIn: '8h' }
     );
@@ -71,9 +68,11 @@ async function actualizarPasswordPrimeraVez(usuarioId, nuevaPassword) {
     };
 }
 
+
 module.exports = {
     verificarCredenciales,
-    actualizarPasswordPrimeraVez
+    actualizarPasswordPrimeraVez,
+
 };
 
 

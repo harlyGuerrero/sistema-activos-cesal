@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {validarJWT, isAdmin}= require('../middlewares/auth.middleware');
+const {validarJWT, isAdmin, isActive}= require('../middlewares/auth.middleware');
 
 const userController = require('../controllers/user.controller');
 
@@ -52,7 +52,7 @@ const userController = require('../controllers/user.controller');
  *       500:
  *         description: Error interno del servidor.
  */
-router.get('/',validarJWT,isAdmin, userController.listarUsuarios);
+router.get('/',validarJWT,isActive,isAdmin, userController.listarUsuarios);
 /**
  * @swagger
  * /api/users:
@@ -145,7 +145,7 @@ router.get('/',validarJWT,isAdmin, userController.listarUsuarios);
  *       500:
  *         description: Error interno del servidor al procesar la creación del usuario.
  */
-router.post('/',validarJWT, isAdmin, userController.crearUsuario);
+router.post('/',validarJWT,isActive, isAdmin, userController.crearUsuario);
 /**
  * @swagger
  * /api/users/{id}:
@@ -227,7 +227,7 @@ router.post('/',validarJWT, isAdmin, userController.crearUsuario);
  *       500:
  *         description: Error interno en el servidor.
  */
-router.get('/:id',validarJWT, userController.obtenerUsuarioPorId);
+router.get('/:id',validarJWT,isActive, userController.obtenerUsuarioPorId);
 /**
  * @swagger
  * /api/users/{id}:
@@ -332,7 +332,7 @@ router.get('/:id',validarJWT, userController.obtenerUsuarioPorId);
  *       500:
  *         description: Error interno del servidor durante la actualización.
  */
-router.put('/:id',validarJWT, userController.actualizarUsuario);
+router.put('/:id',validarJWT,isActive, userController.actualizarUsuario);
 /**
  * @swagger
  * /api/users/{id}:
@@ -376,6 +376,6 @@ router.put('/:id',validarJWT, userController.actualizarUsuario);
  *       500:
  *         description: Error interno en el servidor al procesar la baja.
  */
-router.delete('/:id',validarJWT,isAdmin, userController.eliminarUsuario);
+router.delete('/:id',validarJWT,isActive,isAdmin, userController.eliminarUsuario);
 
 module.exports = router;

@@ -18,8 +18,7 @@ const { validarJWT, isAdmin } = require('../middlewares/auth.middleware');
  *       401:
  *         description: No autorizado
  */
-router.get('/', validarJWT, rolController.listarRoles);
-
+router.get('/', validarJWT,isAdmin, rolController.listarRoles);
 /**
  * @swagger
  * /api/roles/{id}:
@@ -40,8 +39,7 @@ router.get('/', validarJWT, rolController.listarRoles);
  *       404:
  *         description: Rol no encontrado
  */
-router.get('/:id', validarJWT, rolController.obtenerRolPorId);
-
+router.get('/:id', validarJWT,isAdmin, rolController.obtenerRolPorId);
 /**
  * @swagger
  * /api/roles:
@@ -69,7 +67,6 @@ router.get('/:id', validarJWT, rolController.obtenerRolPorId);
  *         description: No autorizado
  */
 router.post('/', validarJWT, isAdmin, rolController.crearRol);
-
 /**
  * @swagger
  * /api/roles/{id}:
@@ -101,7 +98,6 @@ router.post('/', validarJWT, isAdmin, rolController.crearRol);
  *         description: Rol no encontrado
  */
 router.put('/:id', validarJWT, isAdmin, rolController.actualizarRol);
-
 /**
  * @swagger
  * /api/roles/{id}:
