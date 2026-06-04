@@ -1,17 +1,15 @@
 import { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { 
-  Camera, 
-  UploadCloud, 
-  Trash2, 
-  Check, 
-  FileImage, 
-  FileText, 
-  Eye
-} from "lucide-react";
+import { Camera, UploadCloud, Trash2, FileImage, FileText } from "lucide-react";
 
 import { Button } from "@/shared/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/shared/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/shared/ui/dialog";
 import { FormSection } from "./FormSection";
 
 interface Props {
@@ -57,7 +55,7 @@ export function RegistroFotografico({ images, onChange }: Props) {
     (acceptedFiles: File[]) => {
       onChange([...images, ...acceptedFiles]);
     },
-    [images, onChange]
+    [images, onChange],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -123,17 +121,17 @@ export function RegistroFotografico({ images, onChange }: Props) {
                       isPreviewable ? "cursor-pointer" : ""
                     }`}
                     onClick={() => isPreviewable && setSelectedFile(file)}
-                    title={isPreviewable ? "Haga clic para previsualizar" : undefined}
+                    title={
+                      isPreviewable ? "Haga clic para previsualizar" : undefined
+                    }
                   >
-                    <div className="p-2.5 rounded-xl shrink-0 relative group/icon" style={{ backgroundColor: "transparent" }}>
+                    <div
+                      className="p-2.5 rounded-xl shrink-0 relative group/icon"
+                      style={{ backgroundColor: "transparent" }}
+                    >
                       <div className={`p-2.5 rounded-xl ${bgColor}`}>
                         {icon}
                       </div>
-                      {isPreviewable && (
-                        <div className="absolute inset-0 bg-black/5 dark:bg-white/5 rounded-xl opacity-0 group-hover/icon:opacity-100 flex items-center justify-center transition-opacity">
-                          <Eye className="h-3.5 w-3.5 text-slate-600 dark:text-slate-300" />
-                        </div>
-                      )}
                     </div>
                     <div className="flex flex-col min-w-0">
                       <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-[#006BA6] transition-colors">
@@ -147,15 +145,11 @@ export function RegistroFotografico({ images, onChange }: Props) {
 
                   {/* Estado / Eliminar */}
                   <div className="flex items-center gap-2 shrink-0">
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950/60 group-hover:hidden transition-all">
-                      <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 stroke-[3]" />
-                    </div>
-
                     <Button
                       type="button"
                       size="icon"
                       variant="ghost"
-                      className="hidden group-hover:flex h-7 w-7 text-rose-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-lg transition-all"
+                      className="cursor-pointer flex h-7 w-7 text-rose-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-lg transition-all"
                       onClick={() => removeImage(index)}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -169,17 +163,17 @@ export function RegistroFotografico({ images, onChange }: Props) {
       </div>
 
       {/* MODAL ADAPTATIVO */}
-      <VistaPreviaModal 
-        file={selectedFile} 
-        isOpen={!!selectedFile} 
-        onClose={() => setSelectedFile(null)} 
+      <VistaPreviaModal
+        file={selectedFile}
+        isOpen={!!selectedFile}
+        onClose={() => setSelectedFile(null)}
       />
     </FormSection>
   );
 }
 
 /* ==========================================================================
-   Componente: VistaPreviaModal (Soporte Inteligente para Imágenes y PDFs)
+  Componente: VistaPreviaModal (Soporte Inteligente para Imágenes y PDFs)
    ========================================================================== */
 interface VistaPreviaModalProps {
   file: File | null;
@@ -215,7 +209,7 @@ function VistaPreviaModal({ file, isOpen, onClose }: VistaPreviaModalProps) {
       {/* CAMBIO CRÍTICO: max-w-5xl para PDFs (necesitan espacio) y max-w-2xl para imágenes normales.
         w-[95vw] asegura que en pantallas móviles o tablets se aproveche todo el espacio sin romperse.
       */}
-      <DialogContent 
+      <DialogContent
         className={`w-[95vw] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white dark:bg-slate-950 transition-all duration-300 ${
           isPdf ? "max-w-5xl" : "max-w-2xl"
         }`}
