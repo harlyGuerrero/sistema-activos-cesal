@@ -1,5 +1,10 @@
 const db = require('../config/db');
-const bcrypt = require('bcrypt');
+/**
+ * Nota:
+ * bcryptjs se usa por compatibilidad con arquitectura de 32btis
+ * En servidores de arquitectura x64 se puede usar el nativo bcrypt
+ */
+const bcrypt = require('bcryptjs');
 
 async function listarUsuarios() {
 
