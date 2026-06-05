@@ -25,7 +25,7 @@ export default function SystemLayout() {
     <SidebarProvider defaultOpen={true}>
       <AppSidebar />
 
-      <SidebarInset>
+      <SidebarInset className="w-100">
         <header
           className=" sticky top-0 z-40 flex h-16 shrink-0 items-center
         border-b border-slate-200 bg-white px-4
