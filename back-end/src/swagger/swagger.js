@@ -10,9 +10,17 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:3000'
+                url: 'http://192.168.18.15:3000'
             }
         ],
+        /**
+         * Se hizo el respectivo cambio para hacer pruebas de servidor casero
+         * servers: [
+         *             {
+         *                 url: 'http://localhost:3000'
+         *             }
+         * ],
+         */
         components: {
             securitySchemes: {
                 bearerAuth: {
