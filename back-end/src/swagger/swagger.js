@@ -13,8 +13,18 @@ const options = {
         },
         servers: [
             {
-                url: URL_SERVIDOR, // 👈 Usa la URL completa calculada arriba
-                description: process.env.RENDER_EXTERNAL_URL ? 'Servidor de Producción (Render)' : 'Servidor Casero Local'
+
+                url: 'https://sistema-activos-cesal.onrender.com',
+                description: 'Servidor de Producción (Render)'
+            },
+            {
+                url: 'http://localhost:3000',
+                description: 'Servidor Local (Mi Computadora)'
+            },
+            {
+                url: 'http://192.168.18.15:3000',
+                description: 'Servidor Casero'
+
             }
         ],
         components: {

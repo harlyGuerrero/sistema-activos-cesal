@@ -10,7 +10,7 @@ const rolRoutes = require('../routes/rol.routes');
 
 const tipoMaquinariaRoutes = require('../routes/tipoMaquinaria.routes');
 
-const { swaggerDocs } = require('../config/swagger');
+const { swaggerUi, specs } = require('../config/swagger');
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.use(express.json());
 
 app.use(cors());
 
-swaggerDocs(app);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
