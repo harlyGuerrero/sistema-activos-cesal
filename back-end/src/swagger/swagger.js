@@ -1,6 +1,9 @@
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
+//Si estás en Render, usa su URL. Si estás en tu casa, usa la IP de tu servidor casero
+const URL_SERVIDOR = process.env.RENDER_EXTERNAL_URL || 'http://localhost:3000';
+
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -10,7 +13,8 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:3000'
+                url: URL_SERVIDOR, // 👈 Usa la URL completa calculada arriba
+                description: process.env.RENDER_EXTERNAL_URL ? 'Servidor de Producción (Render)' : 'Servidor Casero Local'
             }
         ],
         components: {
@@ -30,5 +34,5 @@ const specs = swaggerJsdoc(options);
 
 module.exports = {
     swaggerUi,
-    specs
+    specs,
 };
