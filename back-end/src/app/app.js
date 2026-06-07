@@ -10,9 +10,7 @@ const rolRoutes = require('../routes/rol.routes');
 
 const tipoMaquinariaRoutes = require('../routes/tipoMaquinaria.routes');
 
-
 const { swaggerDocs } = require('../config/swagger');
-
 
 const app = express();
 
@@ -23,16 +21,14 @@ app.use(
 );
 
 app.use(express.json());
-app.use(cors(
-    origin
-));
 
+app.use(cors());
+
+swaggerDocs(app);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', rolRoutes);
 app.use('/api/tipo-maquinaria', tipoMaquinariaRoutes);
-
-swaggerDocs(app);
 
 module.exports = app;
