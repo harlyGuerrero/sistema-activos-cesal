@@ -3,14 +3,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const authRoutes = require('../routes/auth.routes');
-
 const userRoutes = require('../routes/user.routes');
-
 const rolRoutes = require('../routes/rol.routes');
-
 const tipoMaquinariaRoutes = require('../routes/tipoMaquinaria.routes');
 
-const { swaggerUi, specs } = require('../config/swagger');
+const { swaggerDocs } = require('../config/swagger');
 
 const app = express();
 
@@ -21,10 +18,10 @@ app.use(
 );
 
 app.use(express.json());
-
 app.use(cors());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+// Swagger
+swaggerDocs(app);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
