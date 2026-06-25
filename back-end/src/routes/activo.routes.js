@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {validarJWT, isAdmin, isActive}= require('../middlewares/auth.middleware');
 
-const activoController=require('../controllers/activo.Controller');
+const activoController=require('../controllers/activo.controller');
 //ready
 /**
  * @swagger
