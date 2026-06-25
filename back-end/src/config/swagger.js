@@ -22,12 +22,12 @@ const options = {
         },
         servers: [
             {
-                url: 'https://sistema-activos-cesal.onrender.com',
-                description: 'Servidor de Producción (Render)'
-            },
-            {
                 url: 'http://localhost:3000',
                 description: 'Servidor Local (Mi Computadora)'
+            },
+            {
+                url: 'https://sistema-activos-cesal.onrender.com',
+                description: 'Servidor de Producción (Render)'
             },
             {
                 url: 'http://192.168.18.15:3000',

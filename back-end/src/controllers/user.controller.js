@@ -9,7 +9,6 @@ async function listarUsuarios(req, res) {
             data: usuarios,
         });
     } catch (error) {
-        console.error("Error en listarUsuarios Controller:", error);
         return res.status(500).json({
             status: 'ERROR',
             message: 'Hubo un error interno en el servidor al listar los usuarios.'

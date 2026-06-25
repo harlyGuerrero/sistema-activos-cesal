@@ -1,0 +1,141 @@
+const db = require('../config/db');
+/**
+ * Nota:
+ * bcryptjs se usa por compatibilidad con arquitectura de 32btis
+ * En servidores de arquitectura x64 se puede usar el nativo bcrypt
+ */
+const bcrypt = require('bcryptjs');
+const {registrarActivoMobiliario} = require("../controllers/activo.controller");
+
+async function listarActivos(limit, offset,idSede,idTipoActivo, idEstado, textoBusqueda){
+
+    const [rowActivos] = await db.query('call sp_listar_activosGenerales(?,?,?,?,?,?)',[limit, offset,idSede, idTipoActivo,idEstado,textoBusqueda]);
+    const data = rowActivos[0];
+
+    let total_Activo=0;
+
+    if (data.length > 0){
+        total_Activo = data[0].totalActivos;
+        data.forEach(activo => {
+            delete activo.totalActivos;
+        })
+    }
+
+    return {
+        total_Activos,
+        data
+    }
+}
+
+async function listarActivoEspecifico(idActivo,idTipoActivo) {
+    const [rowActivoEsp] = await db.query('call sp_listar_activoEspecifico(?,?)',[idActivo,idTipoActivo]);
+
+    return rowActivoEsp[0].length > 0 ? rowActivoEsp[0][0] : null;
+}
+
+async function registrarActivoVehicular(datosVehiculares){
+    const [rowActivoVehicular] = await db.query('call sp_registrar_activoVehicular(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosVehiculares]);
+    return rowActivoVehicular;
+}
+
+async function registrarActivoInformatico(datosInformaticos){
+    const [rowActivoInformatico] = await db.query('call sp_registrar_activoInformatico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosInformaticos]);
+    return rowActivoInformatico;
+}
+
+async function registrarActivoMueble(datosMobiliarios){
+    const [rowActivoMobiliario] = await db.query('call sp_registrar_activoMobiliario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosMobiliarios]);
+    return rowActivoMobiliario;
+}
+
+async function registrarActivoInmueble(datosInmobiliarios){
+    const [rowActivoInmobiliario] = await db.query('call sp_registrar_activoInmobiliario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosInmobiliarios]);
+    return rowActivoInmobiliario;
+}
+
+async function registrarActivoMaquinaria(datosMaquinarias){
+    const [rowActivoMaquinaria] = await db.query('call sp_registrar_activoMaquinaria(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosMaquinarias]);
+    return rowActivoMaquinaria;
+}
+
+async function registrarActivoOficina(datosOficina){
+    const [rowActivoOficina] = await db.query('call sp_registrar_activoMaquinaria(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosOficina]);
+    return rowActivoOficina;
+}
+
+async function ultimoHash(idActivo){
+    const [rowhash] = await db.query('select hashActual from historialActivo where idActivo = ? order by id desc limit 1',[idActivo]);
+    return rowhash.length>0 ? rowhash[0].hashActual : '0000000000000000000000000000000000000000000000000000000000000000';
+}
+
+async function actualizarActivoVehicular(datosVehicularesAct){
+    const [rowActivoVehicularAct]=('call sp_actualizar_activoVehicular(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosVehicularesAct]);
+    return datosVehicularesAct;
+}
+
+async function actualizarActivoInformatico(datosInformaticoAct){
+    const [rowActivoInformaticoAct]=('call sp_actualizar_activoInformatico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosInformaticoAct]);
+    return datosInformaticoAct;
+}
+
+async function actualizarActivoMobiliario(datosMobiliarioAct){
+    const [rowActivoMobiliarioAct]=('call sp_actualizar_activoMobiliario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosMobiliarioAct]);
+    return datosMobiliarioAct;
+}
+
+async function actualizarActivoInmobiliario(datosInmobiliarioAct){
+    const [rowActivoInmobiliarioAct]=('call sp_actualizar_activoInmueble(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosInmobiliarioAct]);
+    return rowActivoInmobiliarioAct;
+}
+
+async function actualizarActivoMaquinaria(datosMaquinariaAct){
+    const [rowActivoMaquinariaAct]=('call sp_actualizar_activoMaquinaria(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosMaquinariaAct]);
+    return rowActivoMaquinariaAct;
+}
+
+async function actualizarActivoOficina(datosOficinaAct){
+    const [rowActivoOficinaAct]=('call sp_actualizar_activoOficina(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosOficinaAct]);
+    return rowActivoOficinaAct;
+}
+
+async function darBaja(datosBajas){
+    const [rowBaja]=('call sp_baja_activo(?,?,?,?,?,?,?)',[datosBajas]);
+    return rowBaja;
+}
+
+async function ajusteContable(datosContables){
+    const [rowContable]=('call sp_ajusteContable(?,?,?,?,?,?,?,?,?)',[datosContables]);
+    return rowContable;
+}
+
+async function KPIsDashboard(){
+    const [rowKPIs] = await db.query('call sp_dashboardKPIs()');
+    return rowKPIs[0][0];
+}
+
+async function Dashboard(){
+    const [rowKPIsSedes] = await db.query('call sp_dashboardKPIs_sedes()');
+    return rowKPIsSedes[0];
+}
+
+module.exports = {
+    listarActivos,
+    listarActivoEspecifico,
+    registrarActivoVehicular,
+    registrarActivoInformatico,
+    registrarActivoMueble,
+    registrarActivoInmueble,
+    registrarActivoMaquinaria,
+    registrarActivoOficina,
+    ultimoHash,
+    actualizarActivoVehicular,
+    actualizarActivoInformatico,
+    actualizarActivoMobiliario,
+    actualizarActivoInmobiliario,
+    actualizarActivoMaquinaria,
+    actualizarActivoOficina,
+    ajusteContable,
+    darBaja,
+    KPIsDashboard,
+    Dashboard,
+};
