@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const catalogoController = require('../controllers/catalogo.Controller');
+const catalogoController = require('../controllers/catalogo.controller');
 const { validarJWT } = require('../middlewares/auth.middleware');
 
 /**
