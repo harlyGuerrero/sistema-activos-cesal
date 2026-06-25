@@ -8,45 +8,12 @@ const activoController=require('../controllers/activo.controller');
  * @swagger
  * /api/activo/ready:
  *   get:
- *     summary: Lista y filtra los activos patrimoniales
- *     description: Obtiene la lista de activos de la ONG CESAL con paginación. Requiere token JWT válido.
+ *     summary: Obtiene la lista de todos los activos patrimoniales
+ *     description: Retorna la lista completa de activos registrados en el sistema. Requiere token JWT válido.
  *     tags:
  *       - Activos
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           default: 1
- *         description: Número de la página
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           default: 5
- *         description: Cantidad de registros por página
- *       - in: query
- *         name: sede
- *         schema:
- *           type: integer
- *         description: ID de la Sede para filtrar
- *       - in: query
- *         name: categoria
- *         schema:
- *           type: integer
- *         description: ID del Tipo de Activo / Categoría
- *       - in: query
- *         name: estado
- *         schema:
- *           type: integer
- *         description: ID del Estado Físico
- *       - in: query
- *         name: buscar
- *         schema:
- *           type: string
- *         description: Búsqueda por nombre o código patrimonial
  *     responses:
  *       200:
  *         description: Lista de activos recuperada con éxito.
@@ -80,7 +47,7 @@ const activoController=require('../controllers/activo.controller');
  *                         example: INF-2023-045
  *                       codigoProveedor:
  *                         type: string
- *                         example: PROY-001
+ *                         example: PROV-001
  *                       codigoProyecto:
  *                         type: string
  *                         example: PROY-001
@@ -98,11 +65,12 @@ const activoController=require('../controllers/activo.controller');
  *                         example: Operativo
  *                       costo:
  *                         type: number
+ *                         format: float
  *                         example: 3500.50
  *                       fechaAdquisicion:
  *                         type: string
  *                         format: date
- *                         example: 2025-01-15
+ *                         example: "2025-01-15"
  *                       ambiente:
  *                         type: string
  *                         example: Oficina Principal
@@ -121,11 +89,11 @@ const activoController=require('../controllers/activo.controller');
  *                       f_creacion:
  *                         type: string
  *                         format: date-time
- *                         example: 2025-01-15T08:30:00Z
+ *                         example: "2025-01-15T08:30:00Z"
  *                       f_ultimaActualizacion:
  *                         type: string
  *                         format: date-time
- *                         example: 2025-06-20T14:15:00Z
+ *                         example: "2025-06-20T14:15:00Z"
  *       401:
  *         description: No autorizado. Token JWT faltante o inválido.
  *       404:

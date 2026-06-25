@@ -6,9 +6,9 @@ const db = require('../config/db');
  */
 const bcrypt = require('bcryptjs');
 
-async function listarActivos(limit, offset,idSede,idTipoActivo, idEstado, textoBusqueda){
+async function listarActivos(){
 
-    const [rowActivos] = await db.query('call sp_listar_activosGenerales(?,?,?,?,?,?)',[limit, offset,idSede, idTipoActivo,idEstado,textoBusqueda]);
+    const [rowActivos] = await db.query('call sp_listar_activosGenerales()');
     const data = rowActivos[0];
 
     let total_Activo=0;
