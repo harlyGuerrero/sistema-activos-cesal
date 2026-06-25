@@ -1340,6 +1340,5 @@ router.get('/dashboard/sedes',validarJWT,isActive,activoController.Dashboard)
 
 //Importación
 
-router.post();
 
 module.exports = router;
