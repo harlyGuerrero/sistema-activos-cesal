@@ -1,7 +1,11 @@
 import { AlertTriangle, CheckCircle2, Circle, XCircle } from "lucide-react";
 
-import type { AssetStatus } from "../types/asset.types";
-
+export type AssetStatus =
+  | "Disponible"
+  | "Asignado"
+  | "Mantenimiento"
+  | "Baja";
+  
 export const badgeStyles: Record<AssetStatus, string> = {
   Disponible:
     "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400",

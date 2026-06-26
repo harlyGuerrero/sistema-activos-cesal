@@ -7,11 +7,11 @@ import {
 } from "../../schemas/ActivoInformaticoSchema";
 
 import { Button } from "@/shared/ui/button";
-import { UbicacionAsignacion } from "../../components/sections/UbicacionAsignacion";
-import { InformacionPatrimonial } from "../../components/sections/InformacionPatrimonial";
-import { EspecificacionesTecnicasInformatico } from "../../components/sections/EspecificacionesTecnicasInformatico";
+import { UbicacionAsignacion } from "../../components/formulario/UbicacionAsignacion";
+import { InformacionPatrimonial } from "../../components/formulario/InformacionPatrimonial";
+import { EspecificacionesTecnicasInformatico } from "../../components/formulario/EspecificacionesTecnicasInformatico";
 import { useState } from "react";
-import { RegistroFotografico } from "../../components/sections/RegistroFotografico";
+import { RegistroFotografico } from "../../components/formulario/RegistroFotografico";
 import { Link } from "react-router";
 
 export default function NuevoActivoInformatico() {
@@ -72,11 +72,11 @@ export default function NuevoActivoInformatico() {
 
       <div className="flex justify-end gap-3">
         <Link to="/activos/nuevo">
-          <Button variant="outline" className="cursor-pointer">
+          <Button className="cursor-pointer bg-slate-100 shadow text-slate-900">
             Volver
           </Button>
         </Link>
-        <Button type="submit" className="cursor-pointer">
+        <Button type="submit" className="cursor-pointer shadow bg-blue-700 text-slate-100">
           Guardar Activo
         </Button>
       </div>

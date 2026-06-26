@@ -1,8 +1,5 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/shared/ui/avatar"
+import { useAuthStore } from "@/features/auth/store/authStore";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,25 +8,42 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/shared/ui/dropdown-menu"
+} from "@/shared/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/shared/ui/sidebar"
-import { BadgeCheckIcon, BellIcon, LogOutIcon, EllipsisVertical } from "lucide-react"
+} from "@/shared/ui/sidebar";
+import {
+  BadgeCheckIcon,
+  BellIcon,
+  LogOutIcon,
+  EllipsisVertical,
+} from "lucide-react";
+import { useNavigate } from "react-router";
 
 export function NavUser({
   user,
 }: {
   user: {
-    name: string
-    email: string
-    avatar: string
-  }
+    name: string;
+    email: string;
+    avatar: string;
+  };
 }) {
-  const { isMobile } = useSidebar()
+  const { isMobile } = useSidebar();
+  const navigate = useNavigate();
+
+  const logout = useAuthStore((state) => state.logout);
+
+  const handleLogout = () => {
+    logout();
+
+    navigate("/login", {
+      replace: true,
+    });
+  };
 
   return (
     <SidebarMenu>
@@ -76,25 +90,22 @@ export function NavUser({
             <DropdownMenuSeparator className="bg-slate-300" />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <BadgeCheckIcon
-                />
+                <BadgeCheckIcon />
                 Mi Cuenta
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <BellIcon
-                />
+                <BellIcon />
                 Notificaciones
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator className="bg-slate-300"/>
-            <DropdownMenuItem>
-              <LogOutIcon
-              />
+            <DropdownMenuSeparator className="bg-slate-300" />
+            <DropdownMenuItem onClick={handleLogout}>
+              <LogOutIcon />
               Cerrar Sesión
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

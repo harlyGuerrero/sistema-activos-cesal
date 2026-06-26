@@ -11,6 +11,7 @@ import NuevoActivoInformatico from "@/features/activos/pages/categorias/NuevoAct
 
 import ProtectedRoute from "./ProtectedRoute";
 import { useAuthStore } from "@/features/auth/store/authStore";
+import ActivoDetallePage from "@/features/activos/pages/ActivoDetallePage";
 
 interface GuestGuardProps {
   children: React.ReactNode;
@@ -103,6 +104,10 @@ const Router = createBrowserRouter([
       {
         path: "/activos/nuevo",
         element: <SeleccionarCategoriaActivo />,
+      },
+      {
+        path: "/activos/:codigoPatrimonial",
+        element: <ActivoDetallePage />,
       },
       {
         path: "/activos/nuevo/equipos-informaticos",
