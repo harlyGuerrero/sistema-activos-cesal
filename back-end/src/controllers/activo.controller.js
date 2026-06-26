@@ -51,7 +51,7 @@ async function listarActivos(req, res) {
 }
 async function listarActivosSpe(req, res) {
     try {
-        const idActivo = parseInt(req.param.id);
+        const idActivo = parseInt(req.params.id);
         const idTipoActivo = parseInt(req.query.categoria);
 
         if (isNaN(idActivo) || isNaN(idTipoActivo)) {
@@ -76,6 +76,7 @@ async function listarActivosSpe(req, res) {
             data: activo
         })
     }catch(err){
+        console.error("ERROR COMPLETO:", err);
         res.status(500).json({
             status: 'error',
             message: 'Hubo un error interno en el servidor al obtener los detalles del activo.'

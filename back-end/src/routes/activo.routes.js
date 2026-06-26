@@ -256,7 +256,7 @@ router.get('/ready-Specification/:id', activoController.listarActivosSpe)
  *       500:
  *         description: Error interno del servidor.
  */
-router.post('/create-vehiculos',validarJWT,isActive,isAdmin, activoController.registrarActivoVehicular);
+router.post('/create-vehiculos', validarJWT,isActive,isAdmin,activoController.registrarActivoVehicular);
 /**
  * @swagger
  * /api/activo/create-informaticos:
