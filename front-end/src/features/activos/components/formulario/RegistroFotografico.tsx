@@ -38,7 +38,7 @@ const getFileConfig = (file: File) => {
     return {
       icon: <FileText className="h-5 w-5 text-rose-600 dark:text-rose-400" />,
       bgColor: "bg-rose-50 dark:bg-rose-950/40",
-      isPreviewable: true, // ¡Ahora los PDFs también son previsualizables!
+      isPreviewable: true,
     };
   }
   return {
