@@ -101,7 +101,7 @@ const activoController=require('../controllers/activo.controller');
  *       500:
  *         description: Error interno del servidor.
  */
-router.get('/ready', validarJWT,isActive,activoController.listarActivos);
+router.get('/ready',activoController.listarActivos);
 /**
  * @swagger
  * /api/activo/ready-Specification/{id}:
@@ -178,7 +178,7 @@ router.get('/ready', validarJWT,isActive,activoController.listarActivos);
  *       500:
  *         description: Error interno en el servidor.
  */
-router.get('/ready-Specification/:id',validarJWT,isActive, activoController.listarActivosSpe)
+router.get('/ready-Specification/:id', activoController.listarActivosSpe)
 //create
 /**
  * @swagger
