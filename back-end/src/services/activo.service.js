@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 
 async function listarActivos(){
 
-    const [rowActivos] = await db.query('call sp_listar_activosGenerales()');
+    const [rowActivos] = await db.query('call sp_listar_activoGenerales()');
     const data = rowActivos[0];
 
     let total_Activo=0;
@@ -21,7 +21,7 @@ async function listarActivos(){
     }
 
     return {
-        total_Activos,
+        total_Activo,
         data
     }
 }
@@ -33,8 +33,10 @@ async function listarActivoEspecifico(idActivo,idTipoActivo) {
 }
 
 async function registrarActivoVehicular(datosVehiculares){
-    const [rowActivoVehicular] = await db.query('call sp_registrar_activoVehicular(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosVehiculares]);
-    return rowActivoVehicular;
+    const query = `CALL sp_registrar_activoVehicular(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+
+    // Aquí 'datos' es el array que ya armaste en el controlador con los 20 elementos
+    return await db.execute(query, datosVehiculares);
 }
 
 async function registrarActivoInformatico(datosInformaticos){

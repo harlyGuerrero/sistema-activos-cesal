@@ -20,7 +20,8 @@ async function listarActivos(req, res) {
             totalActivos: activos.totalActivos,
             data: activos.data,
         });
-    }catch(err){
+    }catch(error){
+        console.error("ERROR COMPLETO:", error);
         res.status(500).json({
             status: 'ERROR',
             message: 'Hubo un error interno en el servidor al listar los activos.'
@@ -93,15 +94,16 @@ async function registrarActivoVehicular(req, res) {
             message: 'Activo vehicular registrado exitosamente en el sistema.'
         })
 
-    }catch(err){
-        if (err.code === 'ER_DUP_ENTRY') {
+    }catch(error){
+        if (error.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({
                 status: 'error',
                 message: 'Ya existe un vehículo registrado con ese Código Patrimonial o Chasis.'
             });
         }
-
+        console.error("ERROR COMPLETO:", error);
         res.status(500).json({
+
             status: 'error',
             message: 'Hubo un error interno en el servidor al registrar el vehículo.'
         });
