@@ -127,7 +127,7 @@ async function registrarActivoInformatico(req, res) {
     try {
         const {nombre, codigoPatrimonial, codigoProveedor, codigoProyecto,idEstado,fechaAdquisicion,
             idFactura,costo,idAmbiente,idUsuario,idMarca, idModelo,idTipoEquipo,numeroSerie,procesador,memoriaRAM,
-        almacenamientoGB,discoDuro,idSistemaOperativo} = req.body;
+        almacenamientoGB,idSistemaOperativo} = req.body;
 
         if (!nombre || !codigoPatrimonial || !numeroSerie) {
             return res.status(400).json({
@@ -148,22 +148,25 @@ async function registrarActivoInformatico(req, res) {
 
         const datosInformaticos = [nombre, codigoPatrimonial, codigoProveedor, codigoProyecto,idEstado,fechaAdquisicion,
             idFactura,costo,idAmbiente,idUsuario,idMarca, idModelo,idTipoEquipo,numeroSerie, procesador,memoriaRAM,
-            almacenamientoGB,discoDuro,idSistemaOperativo,idUsuarioSistema,ipOrigen,hashAnterior,hashActual]
+            almacenamientoGB,idSistemaOperativo,idUsuarioSistema,ipOrigen,hashAnterior,hashActual]
+
 
         await activoService.registrarActivoInformatico(datosInformaticos);
+
         res.status(201).json({
             status: 'success',
             message: 'Activo Informático registrado exitosamente en el sistema.'
         })
 
     }catch(err){
+
         if (err.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({
                 status: 'error',
                 message: 'Ya existe un activo informatico registrado con ese Código Patrimonial o número de serie.'
             });
         }
-
+        console.error("ERROR COMPLETO:", err);
         res.status(500).json({
             status: 'error',
             message: 'Hubo un error interno en el servidor al registrar el activo informatico.'

@@ -21,6 +21,17 @@ app.use(
 app.set('trust proxy', true);
 app.use(express.json());
 app.use(cors());
+app.use((req, res, next) => {
+    let data = '';
+    req.on('data', chunk => { data += chunk; });
+    req.on('end', () => {
+        if (data.includes("SyntaxError")) { // Filtramos para no llenar la consola
+            console.log("--- JSON MALFORMADO RECIBIDO ---");
+            console.log(data);
+        }
+    });
+    next();
+});
 
 // Swagger
 swaggerDocs(app);

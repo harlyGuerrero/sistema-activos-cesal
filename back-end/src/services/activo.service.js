@@ -44,13 +44,15 @@ async function registrarActivoVehicular(datosVehiculares){
 }
 
 async function registrarActivoInformatico(datosInformaticos){
-    const [rowActivoInformatico] = await db.query('call sp_registrar_activoInformatico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosInformaticos]);
-    return rowActivoInformatico;
+
+    const query = 'call sp_registrar_activoInformatico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    return await db.execute(query, datosInformaticos);
+
 }
 
 async function registrarActivoMueble(datosMobiliarios){
-    const [rowActivoMobiliario] = await db.query('call sp_registrar_activoMobiliario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[datosMobiliarios]);
-    return rowActivoMobiliario;
+    const query = 'call sp_registrar_activoMobiliario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    return await db.execute(query, datosMobiliarios);
 }
 
 async function registrarActivoInmueble(datosInmobiliarios){

@@ -118,7 +118,7 @@ router.get('/ready',activoController.listarActivos);
  *         required: true
  *         schema:
  *           type: string
- *         description: ID de la categoría del activo para determinar qué tabla hija consultar.
+ *         description: codigo de Patrimonial del activo para determinar qué tabla hija consultar.
  *     responses:
  *       200:
  *         description: Activo específico recuperado exitosamente.
@@ -250,7 +250,7 @@ router.get('/ready-Specification/:id', activoController.listarActivosSpe)
  *       500:
  *         description: Error interno del servidor.
  */
-router.post('/create-vehiculos', validarJWT,isActive,isAdmin,activoController.registrarActivoVehicular);
+router.post('/create-vehiculos',validarJWT,isActive,isAdmin, activoController.registrarActivoVehicular);
 /**
  * @swagger
  * /api/activo/create-informaticos:
@@ -317,12 +317,9 @@ router.post('/create-vehiculos', validarJWT,isActive,isAdmin,activoController.re
  *               memoriaRAM:
  *                 type: number
  *                 example: 2
- *               AlmacenamientoGB:
+ *               almacenamientoGB:
  *                 type: number
  *                 example: 200
- *               discoDuro:
- *                 type: numbre
- *                 example: 2542
  *               idSistemaOperativo:
  *                 type: integer
  *                 example: 3
