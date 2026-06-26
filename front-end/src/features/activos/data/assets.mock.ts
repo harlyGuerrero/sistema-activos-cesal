@@ -1,4 +1,4 @@
-import { informaticos } from "./activos-informaticos.mock";
+// import { informaticos } from "./activos-informaticos.mock";
 import { vehiculares } from "./activos-vehiculares.mock";
 import { oficina } from "./activos-oficina.mock";
 import { mobiliario } from "./activos-mobiliario.mock";
@@ -6,7 +6,7 @@ import { maquinaria } from "./activos-maquinaria.mock";
 import { inmuebles } from "./activos-inmuebles.mock";
 
 export const assets = [
-  ...informaticos,
+  // ...informaticos,
   ...vehiculares,
   ...oficina,
   ...mobiliario,
