@@ -4,22 +4,43 @@ const crypto = require('crypto');
 const activoService = require('../services/activo.service');
 
 async function listarActivos(req, res) {
-    try{
-        const idSede = req.query.sede ? parseInt(req.query.sede) : null;
-        const idTipoActivo = req.query.categoria ? parseInt(req.query.categoria) : null;
-        const idEstado = req.query.estado ? parseInt(req.query.estado) : null;
-        const textoBusqueda = req.query.buscar ? req.query.buscar : null;
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 5;
-        const offset = (page - 1) * limit;
+    try {
 
-        const activos = await activoService.listarActivos(limit, offset, idSede, idTipoActivo, idEstado, textoBusqueda);
+        const resultado = await activoService.listarActivos();
+
+        const activosEstructurados = resultado.data.map(activo => ({
+            idActivo: activo.idActivo,
+            nombreActivo: activo.nombreActivo,
+            codigoPatrimonial: activo.codigoPatrimonial,
+            codigoProyecto: activo.codigoProyecto,
+            codigoProveedor: activo.codigoProveedor,
+            numeroFactura: activo.numeroFactura,
+            idTipoActivo: activo.idTipoActivo,
+            tipoActivo: activo.tipoActivo,
+            estadoActivo: activo.estadoActivo,
+            costo: parseFloat(activo.costo),
+            fechaAdquisicion: activo.fechaAdquisicion,
+            ambiente: activo.ambiente,
+            unidadOperativa: activo.unidadOperativa,
+            sede: activo.sede,
+            zona: activo.zona,
+            responsable: {
+                id: activo.ID,
+                nombre: activo.nombre,
+                correo: activo.correo,
+                cargo: activo.rol
+            },
+            isActive: !!activo.isActive,
+            f_creacion: activo.f_creacion,
+            f_ultimaActualizacion: activo.f_ultimaActualizacion
+        }));
+
         res.status(200).json({
             status: 'success',
-            message: 'Lista de activos recuperada con exito',
-            totalActivos: activos.totalActivos,
-            data: activos.data,
+            message: 'Lista de activos recuperada con éxito',
+            data: activosEstructurados
         });
+
     }catch(error){
         console.error("ERROR COMPLETO:", error);
         res.status(500).json({
