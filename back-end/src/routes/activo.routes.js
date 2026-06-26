@@ -113,17 +113,11 @@ router.get('/ready',activoController.listarActivos);
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID único del activo.
  *       - in: query
- *         name: categoria
+ *         name: codigo
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *         description: ID de la categoría del activo para determinar qué tabla hija consultar.
  *     responses:
  *       200:

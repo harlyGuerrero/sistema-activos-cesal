@@ -51,17 +51,9 @@ async function listarActivos(req, res) {
 }
 async function listarActivosSpe(req, res) {
     try {
-        const idActivo = parseInt(req.params.id);
-        const idTipoActivo = parseInt(req.query.categoria);
+        const codigoPatrimonial = (req.query.codigo);
 
-        if (isNaN(idActivo) || isNaN(idTipoActivo)) {
-            return res.status(400).json({
-                status: 'error',
-                message: 'El id del activo y la categoría son parámetros requeridos y deben ser números.'
-            });
-        }
-
-        const activo = await activoService.listarActivoEspecifico(idActivo,idTipoActivo);
+        const activo = await activoService.listarActivoEspecifico(codigoPatrimonial);
 
         if (!activo) {
             return res.status(404).json({

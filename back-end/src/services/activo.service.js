@@ -26,10 +26,14 @@ async function listarActivos(){
     }
 }
 
-async function listarActivoEspecifico(idActivo,idTipoActivo) {
-    const [rowActivoEsp] = await db.query('call sp_listar_activoEspecifico(?,?)',[idActivo,idTipoActivo]);
+async function listarActivoEspecifico(codigoPatrimonial) {
+    const [result] = await db.execute('CALL sp_listar_activoEspecifico(?)', [codigoPatrimonial]);
 
-    return rowActivoEsp[0].length > 0 ? rowActivoEsp[0][0] : null;
+    if (!result[0] || result[0].length === 0) {
+        return null;
+    }
+
+    return result[0][0];
 }
 
 async function registrarActivoVehicular(datosVehiculares){
